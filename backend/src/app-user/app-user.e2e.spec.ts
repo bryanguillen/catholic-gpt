@@ -4,6 +4,7 @@ import * as request from 'supertest';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppUserModule } from './app-user.module';
 import { AppUser } from './app-user.entity';
+import { Conversation } from '../conversation/conversation.entity';
 
 describe('AppUserController (e2e)', () => {
   let app: INestApplication;
@@ -14,7 +15,7 @@ describe('AppUserController (e2e)', () => {
         TypeOrmModule.forRoot({
           type: 'sqlite',
           database: ':memory:',
-          entities: [AppUser],
+          entities: [AppUser, Conversation],
           synchronize: true,
         }),
         AppUserModule,
