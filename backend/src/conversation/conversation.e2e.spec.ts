@@ -2,11 +2,11 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { INestApplication } from '@nestjs/common';
 import * as request from 'supertest';
 import { getRepositoryToken, TypeOrmModule } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
 import { ConversationModule } from './conversation.module';
 import { Conversation } from './conversation.entity';
 import { AppUser } from '../app-user/app-user.entity';
 import { AppUserService } from '../app-user/app-user.service';
-import { Repository } from 'typeorm';
 
 describe('ConversationController (e2e)', () => {
   let app: INestApplication;
