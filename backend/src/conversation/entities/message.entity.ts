@@ -8,7 +8,7 @@ import {
 } from 'typeorm';
 import { Conversation } from './conversation.entity';
 
-enum SenderType {
+export enum SenderType {
   BOT = 'bot',
   USER = 'user',
 }
