@@ -9,6 +9,7 @@ import { Message } from './entities/message.entity';
 import { AppUser } from '../app-user/app-user.entity';
 import { AppUserService } from '../app-user/app-user.service';
 
+// TODO: Write tests for the sendMessage endpoint
 describe('ConversationController (e2e)', () => {
   let app: INestApplication;
   let appUserService: AppUserService;
