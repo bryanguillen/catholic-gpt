@@ -14,4 +14,8 @@ export class AppUserService {
     appUser.id = userId;
     return this.appUserRepository.save(appUser);
   }
+
+  async getAppUser(userId: string): Promise<AppUser> {
+    return await this.appUserRepository.findOne({ where: { id: userId } });
+  }
 }
