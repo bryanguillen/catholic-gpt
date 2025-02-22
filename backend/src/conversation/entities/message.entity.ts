@@ -25,6 +25,7 @@ export class Message {
   conversation: Conversation;
 
   @Column({
+    // todo: change to enum; use text for now for testing with sqlite
     type: 'text',
     name: 'sender_type',
   })
