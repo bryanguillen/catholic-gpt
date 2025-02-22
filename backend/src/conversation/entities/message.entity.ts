@@ -25,8 +25,7 @@ export class Message {
   conversation: Conversation;
 
   @Column({
-    type: 'enum',
-    enum: SenderType,
+    type: 'text',
     name: 'sender_type',
   })
   senderType: SenderType;
