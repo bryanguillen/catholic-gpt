@@ -7,7 +7,8 @@ export class AppUserController {
   constructor(private readonly appUserService: AppUserService) {}
 
   @Post()
-  createAppUser(@Body() body: CreateAppUserDto) {
-    return this.appUserService.createAppUser(body.userId);
+  async createAppUser(@Body() body: CreateAppUserDto) {
+    const appUser = await this.appUserService.createAppUser(body.userId);
+    return { id: appUser.id };
   }
 }
