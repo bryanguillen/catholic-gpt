@@ -1,7 +1,7 @@
 import { Entity, PrimaryColumn, OneToMany } from 'typeorm';
 import { Conversation } from '../conversation/conversation.entity';
 
-@Entity()
+@Entity('app_user')
 export class AppUser {
   @PrimaryColumn('uuid')
   id: string;
