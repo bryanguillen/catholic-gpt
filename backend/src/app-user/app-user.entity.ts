@@ -1,5 +1,5 @@
 import { Entity, PrimaryColumn, OneToMany, CreateDateColumn } from 'typeorm';
-import { Conversation } from '../conversation/conversation.entity';
+import { Conversation } from '../conversation/entities/conversation.entity';
 
 @Entity('app_user')
 export class AppUser {

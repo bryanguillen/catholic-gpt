@@ -4,7 +4,7 @@ import * as request from 'supertest';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppUserModule } from './app-user.module';
 import { AppUser } from './app-user.entity';
-import { Conversation } from '../conversation/conversation.entity';
+import { Conversation } from '../conversation/entities/conversation.entity';
 
 describe('AppUserController (e2e)', () => {
   let app: INestApplication;
