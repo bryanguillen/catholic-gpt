@@ -5,6 +5,7 @@ import { getRepositoryToken, TypeOrmModule } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { ConversationModule } from './conversation.module';
 import { Conversation } from './entities/conversation.entity';
+import { Message } from './entities/message.entity';
 import { AppUser } from '../app-user/app-user.entity';
 import { AppUserService } from '../app-user/app-user.service';
 
@@ -19,7 +20,7 @@ describe('ConversationController (e2e)', () => {
         TypeOrmModule.forRoot({
           type: 'sqlite',
           database: ':memory:',
-          entities: [Conversation, AppUser],
+          entities: [Conversation, AppUser, Message],
           synchronize: true,
         }),
         ConversationModule,
