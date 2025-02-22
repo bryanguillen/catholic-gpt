@@ -2,10 +2,12 @@ import {
   Entity,
   PrimaryGeneratedColumn,
   ManyToOne,
+  OneToMany,
   JoinColumn,
   CreateDateColumn,
 } from 'typeorm';
 import { AppUser } from '../../app-user/app-user.entity';
+import { Message } from './message.entity';
 
 @Entity()
 export class Conversation {
@@ -20,4 +22,7 @@ export class Conversation {
 
   @CreateDateColumn()
   createdAt: Date;
+
+  @OneToMany(() => Message, (message) => message.conversation)
+  messages: Message[];
 }
