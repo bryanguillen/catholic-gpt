@@ -1,9 +1,14 @@
-import { Entity, PrimaryColumn, OneToMany, CreateDateColumn } from 'typeorm';
+import {
+  Entity,
+  OneToMany,
+  CreateDateColumn,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 import { Conversation } from '../conversation/entities/conversation.entity';
 
 @Entity('app_user')
 export class AppUser {
-  @PrimaryColumn('uuid')
+  @PrimaryGeneratedColumn('uuid')
   id: string;
 
   @CreateDateColumn()

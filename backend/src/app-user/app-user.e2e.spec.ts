@@ -5,6 +5,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppUserModule } from './app-user.module';
 import { AppUser } from './app-user.entity';
 import { Conversation } from '../conversation/entities/conversation.entity';
+import { Message } from '../conversation/entities/message.entity';
 
 describe('AppUserController (e2e)', () => {
   let app: INestApplication;
@@ -15,7 +16,7 @@ describe('AppUserController (e2e)', () => {
         TypeOrmModule.forRoot({
           type: 'sqlite',
           database: ':memory:',
-          entities: [AppUser, Conversation],
+          entities: [AppUser, Conversation, Message],
           synchronize: true,
         }),
         AppUserModule,
@@ -31,11 +32,14 @@ describe('AppUserController (e2e)', () => {
   });
 
   test('/app-user (POST)', () => {
-    const userId = 'test-uuid';
     return request(app.getHttpServer())
       .post('/app-user')
-      .send({ userId })
+      .send()
       .expect(201)
-      .expect({ id: userId });
+      .expect((res) => {
+        expect(res.body).toHaveProperty('id');
+        expect(res.body.id).toBeDefined();
+        expect(typeof res.body.id).toBe('string');
+      });
   });
 });

@@ -9,10 +9,9 @@ export class AppUserService {
     @InjectRepository(AppUser) private appUserRepository: Repository<AppUser>,
   ) {}
 
-  async createAppUser(userId: string): Promise<AppUser> {
+  async createAppUser(): Promise<AppUser> {
     const appUser = new AppUser();
-    appUser.id = userId;
-    return this.appUserRepository.save(appUser);
+    return await this.appUserRepository.save(appUser);
   }
 
   async getAppUser(userId: string): Promise<AppUser> {
