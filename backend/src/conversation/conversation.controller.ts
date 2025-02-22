@@ -1,6 +1,6 @@
 import { Controller, Post, Body } from '@nestjs/common';
 import { ConversationService } from './conversation.service';
-import { CreateConversationDto } from './create-conversation.dto';
+import { CreateConversationDto } from './dto/create-conversation.dto';
 
 @Controller('conversation')
 export class ConversationController {
