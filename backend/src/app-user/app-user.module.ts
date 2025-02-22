@@ -8,5 +8,6 @@ import { AppUserService } from './app-user.service';
   imports: [TypeOrmModule.forFeature([AppUser])],
   controllers: [AppUserController],
   providers: [AppUserService],
+  exports: [AppUserService],
 })
 export class AppUserModule {}
