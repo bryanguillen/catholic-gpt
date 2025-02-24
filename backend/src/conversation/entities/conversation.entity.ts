@@ -5,6 +5,7 @@ import {
   OneToMany,
   JoinColumn,
   CreateDateColumn,
+  Column,
 } from 'typeorm';
 import { AppUser } from '../../app-user/app-user.entity';
 import { Message } from './message.entity';
@@ -13,6 +14,9 @@ import { Message } from './message.entity';
 export class Conversation {
   @PrimaryGeneratedColumn('uuid')
   id: string;
+
+  @Column({ name: 'thread_id' })
+  threadId: string;
 
   @ManyToOne(() => AppUser, (appUser) => appUser.conversations, {
     onDelete: 'CASCADE',
