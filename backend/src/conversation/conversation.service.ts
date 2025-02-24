@@ -4,6 +4,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Conversation } from './entities/conversation.entity';
 import { Message, SenderType } from './entities/message.entity';
 import { AppUserService } from '../app-user/app-user.service';
+import { AssistantService } from './assistant.service';
 
 @Injectable()
 export class ConversationService {
@@ -14,6 +15,7 @@ export class ConversationService {
     private messageRepository: Repository<Message>,
     private appUserService: AppUserService,
     private dataSource: DataSource,
+    private assistantService: AssistantService,
   ) {}
 
   async createConversation(appUserId: string) {
@@ -25,6 +27,7 @@ export class ConversationService {
 
     const conversation = this.conversationRepository.create({
       appUser,
+      threadId: await this.assistantService.createThread(),
     });
 
     return this.conversationRepository.save(conversation);
@@ -37,7 +40,10 @@ export class ConversationService {
       throw new NotFoundException('Conversation not found');
     }
 
-    const response = this.getResponse();
+    const response = await this.assistantService.getResponse(
+      conversation.threadId,
+      message,
+    );
 
     return await this.saveMessageResponsePair(
       conversationId,
