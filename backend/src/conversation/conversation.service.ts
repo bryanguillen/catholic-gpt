@@ -58,11 +58,6 @@ export class ConversationService {
     });
   }
 
-  // TODO: TEMPORARY method to get a response; will be replaced with actual AI response
-  private getResponse() {
-    return 'This is a test response';
-  }
-
   private async saveMessageResponsePair(
     conversationId: string,
     message: string,
