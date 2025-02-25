@@ -46,6 +46,13 @@ export class AssistantService {
       : 'Response not available';
   }
 
+  async storeUserMessage(threadId: string, message: string) {
+    await this.openai.beta.threads.messages.create(threadId, {
+      role: 'user',
+      content: message,
+    });
+  }
+
   private async waitForRunToComplete(threadId: string, runId: string) {
     return asyncRetry(
       async () => {
