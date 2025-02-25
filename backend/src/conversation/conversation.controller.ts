@@ -13,10 +13,11 @@ import { CreateConversationDto } from './dto/create-conversation.dto';
 import { CreateConversationResponseDto } from './dto/create-conversation-response.dto';
 import { SaveUserMessageRequestDto } from './dto/save-user-message-request.dto';
 import { SaveUserMessageResponseDto } from './dto/save-user-message-response.dto';
+import { StreamAssistantResponseDto } from './dto/stream-assistant-response.dto';
 import { convertMessageToDto } from './conversation.utils';
 import { AssistantService } from './assistant.service';
 import { ThreadIdGuard } from './thread-id.guard';
-import { ConversationMetadataInterceptor } from './conversation-metadata.interceptor';
+import { ThreadIdInterceptor } from './thread-id.interceptor';
 
 @Controller('conversation')
 export class ConversationController {
@@ -35,8 +36,7 @@ export class ConversationController {
     return { id: conversation.id };
   }
 
-  @Post(':conversationId/message')
-  @UseInterceptors(ConversationMetadataInterceptor)
+  @Post(':conversationId/message') // interceptor not needed for this one
   @UseGuards(ThreadIdGuard)
   async saveUserMessage(
     @Param('conversationId') conversationId: string,
@@ -53,13 +53,14 @@ export class ConversationController {
   }
 
   @Sse(':conversationId/stream')
-  @UseInterceptors(ConversationMetadataInterceptor)
   @UseGuards(ThreadIdGuard)
+  @UseInterceptors(ThreadIdInterceptor)
   streamAssistantResponse(
     @Param('conversationId') conversationId: string,
-  ): Observable<{ data: string }> {
+    @Body() body: { threadId: string },
+  ): Observable<StreamAssistantResponseDto> {
     return new Observable((observer) => {
-      this.assistantService.streamThreadResponse(conversationId).subscribe({
+      this.assistantService.streamThreadResponse(body.threadId).subscribe({
         next: (data) => observer.next({ data }),
         complete: () => observer.complete(),
         error: (error) => observer.error(error),
