@@ -1,5 +1,5 @@
 import { CanActivate, ExecutionContext, Injectable } from '@nestjs/common';
-import { ConversationService } from './conversation.service';
+import { ConversationService } from './services/conversation.service';
 
 @Injectable()
 export class ThreadIdGuard implements CanActivate {

@@ -9,14 +9,14 @@ import {
 } from '@nestjs/common';
 import { Observable } from 'rxjs';
 import { EventEmitter2 } from '@nestjs/event-emitter';
-import { ConversationService } from './conversation.service';
+import { ConversationService } from './services/conversation.service';
 import { CreateConversationDto } from './dto/create-conversation.dto';
 import { CreateConversationResponseDto } from './dto/create-conversation-response.dto';
 import { SaveUserMessageRequestDto } from './dto/save-user-message-request.dto';
 import { SaveUserMessageResponseDto } from './dto/save-user-message-response.dto';
 import { StreamAssistantResponseDto } from './dto/stream-assistant-response.dto';
 import { convertMessageToDto } from './conversation.utils';
-import { AssistantService } from './assistant.service';
+import { AssistantService } from './services/assistant.service';
 import { ThreadIdGuard } from './thread-id.guard';
 import { ThreadIdInterceptor } from './thread-id.interceptor';
 import {
