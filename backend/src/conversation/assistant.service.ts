@@ -17,6 +17,13 @@ export class AssistantService {
     this.assistantId = this.configService.get<string>('OPENAI_ASSISTANT_ID');
   }
 
+  async addUserMessageToThread(threadId: string, message: string) {
+    await this.openai.beta.threads.messages.create(threadId, {
+      role: 'user',
+      content: message,
+    });
+  }
+
   async createThread() {
     const response = await this.openai.beta.threads.create();
     return response.id;
@@ -44,13 +51,6 @@ export class AssistantService {
     return messageResponse.content[0].type === 'text'
       ? messageResponse.content[0].text.value
       : 'Response not available';
-  }
-
-  async addUserMessageToThread(threadId: string, message: string) {
-    await this.openai.beta.threads.messages.create(threadId, {
-      role: 'user',
-      content: message,
-    });
   }
 
   private async waitForRunToComplete(threadId: string, runId: string) {
