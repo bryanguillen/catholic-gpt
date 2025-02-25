@@ -19,7 +19,6 @@ export class AssistantService {
 
   async createThread() {
     const response = await this.openai.beta.threads.create();
-    console.log('thread response', response);
     return response.id;
   }
 
