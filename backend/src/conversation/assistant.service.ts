@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import OpenAI from 'openai';
+import { Observable } from 'rxjs';
 
 @Injectable()
 export class AssistantService {
@@ -24,5 +25,24 @@ export class AssistantService {
   async createThread() {
     const response = await this.openai.beta.threads.create();
     return response.id;
+  }
+
+  streamThreadResponse(threadId: string): Observable<string> {
+    return new Observable((observer) => {
+      const assistantId = this.assistantId;
+
+      const runStream = this.openai.beta.threads.runs.stream(threadId, {
+        assistant_id: assistantId,
+      });
+
+      runStream
+        .on('textDelta', (textDelta) => observer.next(textDelta.value))
+        .on('end', () => observer.complete())
+        .on('error', (error) => observer.error(error));
+
+      return () => {
+        runStream.abort();
+      };
+    });
   }
 }
