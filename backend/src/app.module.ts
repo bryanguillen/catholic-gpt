@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule, ConfigService } from '@nestjs/config';
+import { EventEmitterModule } from '@nestjs/event-emitter';
 import { AppUserModule } from './app-user/app-user.module';
 import { ConversationModule } from './conversation/conversation.module';
 
@@ -23,6 +24,7 @@ import { ConversationModule } from './conversation/conversation.module';
       }),
       inject: [ConfigService],
     }),
+    EventEmitterModule.forRoot(),
     AppUserModule,
     ConversationModule,
   ],
