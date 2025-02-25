@@ -32,6 +32,12 @@ export class ConversationService {
     return this.conversationRepository.save(conversation);
   }
 
+  async getConversation(conversationId: string) {
+    return await this.conversationRepository.findOne({
+      where: { id: conversationId },
+    });
+  }
+
   async saveUserMessage(conversationId: string, message: string) {
     const conversation = await this.getConversation(conversationId);
 
@@ -51,13 +57,7 @@ export class ConversationService {
     return this.messageRepository.save(userMsg);
   }
 
-  private async getConversation(conversationId: string) {
-    return await this.conversationRepository.findOne({
-      where: { id: conversationId },
-    });
-  }
-
-  private validateConversation(conversation: Conversation) {
+  validateConversation(conversation: Conversation) {
     if (!conversation) {
       throw new NotFoundException('Conversation not found');
     }
