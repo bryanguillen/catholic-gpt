@@ -2,9 +2,9 @@ import { Controller, Post, Body, Param } from '@nestjs/common';
 import { ConversationService } from './conversation.service';
 import { CreateConversationDto } from './dto/create-conversation.dto';
 import { CreateConversationResponseDto } from './dto/create-conversation-response.dto';
-import { SendMessageRequestDto } from './dto/send-message-request.dto';
-import { SendMessageResponseDto } from './dto/send-message-response.dto';
-import { convertMessages } from './conversation.utils';
+import { SaveUserMessageRequestDto } from './dto/save-user-message-request.dto';
+import { SaveUserMessageResponseDto } from './dto/save-user-message-response.dto';
+import { convertMessageToDto } from './conversation.utils';
 
 @Controller('conversation')
 export class ConversationController {
@@ -21,17 +21,17 @@ export class ConversationController {
   }
 
   @Post(':conversationId/message')
-  async sendMessage(
+  async saveUserMessage(
     @Param('conversationId') conversationId: string,
-    @Body() body: SendMessageRequestDto,
-  ): Promise<SendMessageResponseDto> {
-    const messages = await this.conversationService.createMessageResponsePair(
+    @Body() body: SaveUserMessageRequestDto,
+  ): Promise<SaveUserMessageResponseDto> {
+    const message = await this.conversationService.saveUserMessage(
       conversationId,
       body.message,
     );
 
     return {
-      data: convertMessages(messages),
+      data: convertMessageToDto(message),
     };
   }
 }
