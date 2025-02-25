@@ -33,23 +33,6 @@ export class ConversationService {
     return this.conversationRepository.save(conversation);
   }
 
-  async createMessageResponsePair(conversationId: string, message: string) {
-    const conversation = await this.getConversation(conversationId);
-
-    this.validateConversation(conversation);
-
-    const response = await this.assistantService.getResponse(
-      conversation.threadId,
-      message,
-    );
-
-    return await this.saveMessageResponsePair(
-      conversationId,
-      message,
-      response,
-    );
-  }
-
   async saveUserMessage(conversationId: string, message: string) {
     const conversation = await this.getConversation(conversationId);
 
@@ -73,41 +56,6 @@ export class ConversationService {
     return await this.conversationRepository.findOne({
       where: { id: conversationId },
     });
-  }
-
-  private async saveMessageResponsePair(
-    conversationId: string,
-    message: string,
-    response: string,
-  ) {
-    const queryRunner = this.dataSource.createQueryRunner();
-    await queryRunner.connect();
-    await queryRunner.startTransaction();
-
-    try {
-      const userMsg = this.messageRepository.create({
-        conversation: { id: conversationId },
-        content: message,
-        senderType: SenderType.USER,
-      });
-
-      const botMsg = this.messageRepository.create({
-        conversation: { id: conversationId },
-        content: response,
-        senderType: SenderType.BOT,
-      });
-
-      await queryRunner.manager.save(userMsg);
-      await queryRunner.manager.save(botMsg);
-
-      await queryRunner.commitTransaction();
-      return [userMsg, botMsg];
-    } catch (error) {
-      await queryRunner.rollbackTransaction();
-      throw error;
-    } finally {
-      await queryRunner.release();
-    }
   }
 
   private validateConversation(conversation: Conversation) {
