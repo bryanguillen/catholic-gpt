@@ -8,6 +8,7 @@ import {
   UseInterceptors,
 } from '@nestjs/common';
 import { Observable } from 'rxjs';
+import { EventEmitter2 } from '@nestjs/event-emitter';
 import { ConversationService } from './conversation.service';
 import { CreateConversationDto } from './dto/create-conversation.dto';
 import { CreateConversationResponseDto } from './dto/create-conversation-response.dto';
@@ -18,12 +19,17 @@ import { convertMessageToDto } from './conversation.utils';
 import { AssistantService } from './assistant.service';
 import { ThreadIdGuard } from './thread-id.guard';
 import { ThreadIdInterceptor } from './thread-id.interceptor';
+import {
+  RESPONSE_STREAMED_EVENT,
+  ResponseStreamedEvent,
+} from './response-streamed.event';
 
 @Controller('conversation')
 export class ConversationController {
   constructor(
     private readonly conversationService: ConversationService,
     private readonly assistantService: AssistantService,
+    private readonly eventEmitter: EventEmitter2,
   ) {}
 
   @Post()
@@ -59,10 +65,23 @@ export class ConversationController {
     @Param('conversationId') conversationId: string,
     @Body() body: { threadId: string },
   ): Observable<StreamAssistantResponseDto> {
+    const { threadId } = body;
+
     return new Observable((observer) => {
-      this.assistantService.streamThreadResponse(body.threadId).subscribe({
-        next: (data) => observer.next({ data }),
-        complete: () => observer.complete(),
+      let response = '';
+
+      this.assistantService.streamThreadResponse(threadId).subscribe({
+        next: (data) => {
+          response += data;
+          observer.next({ data: response });
+        },
+        complete: () => {
+          this.eventEmitter.emit(
+            RESPONSE_STREAMED_EVENT,
+            new ResponseStreamedEvent(conversationId, response),
+          );
+          observer.complete();
+        },
         error: (error) => observer.error(error),
       });
     });
