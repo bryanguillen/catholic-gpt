@@ -5,7 +5,7 @@ import {
   CallHandler,
 } from '@nestjs/common';
 import { Observable } from 'rxjs';
-import { ConversationService } from './services/conversation.service';
+import { ConversationService } from '../services/conversation.service';
 
 @Injectable()
 export class ThreadIdInterceptor implements NestInterceptor {

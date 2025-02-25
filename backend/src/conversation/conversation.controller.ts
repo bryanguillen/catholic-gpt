@@ -17,12 +17,12 @@ import { SaveUserMessageResponseDto } from './dto/save-user-message-response.dto
 import { StreamAssistantResponseDto } from './dto/stream-assistant-response.dto';
 import { convertMessageToDto } from './conversation.utils';
 import { AssistantService } from './services/assistant.service';
-import { ThreadIdGuard } from './thread-id.guard';
-import { ThreadIdInterceptor } from './thread-id.interceptor';
+import { ThreadIdGuard } from './guards/thread-id.guard';
+import { ThreadIdInterceptor } from './interceptors/thread-id.interceptor';
 import {
   RESPONSE_STREAMED_EVENT,
   ResponseStreamedEvent,
-} from './response-streamed.event';
+} from './events/response-streamed.event';
 
 @Controller('conversation')
 export class ConversationController {

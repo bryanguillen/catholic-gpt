@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { OnEvent } from '@nestjs/event-emitter';
-import { ConversationService } from './services/conversation.service';
+import { ConversationService } from '../services/conversation.service';
 
 export const RESPONSE_STREAMED_EVENT = 'response.streamed';
 
