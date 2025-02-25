@@ -1,11 +1,21 @@
 import { CanActivate, ExecutionContext, Injectable } from '@nestjs/common';
+import { ConversationService } from './conversation.service';
 
 @Injectable()
 export class ThreadIdGuard implements CanActivate {
-  canActivate(context: ExecutionContext): boolean {
-    const request = context.switchToHttp().getRequest();
-    const threadId = request.body.threadId;
+  constructor(private readonly conversationService: ConversationService) {}
 
-    return !!threadId;
+  async canActivate(context: ExecutionContext): Promise<boolean> {
+    const request = context.switchToHttp().getRequest();
+    const conversationId = request.params.conversationId;
+
+    if (!conversationId) {
+      return false;
+    }
+
+    const conversation =
+      await this.conversationService.getConversation(conversationId);
+
+    return !!conversation?.threadId;
   }
 }
