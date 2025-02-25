@@ -38,6 +38,16 @@ export class ConversationService {
     });
   }
 
+  async saveAssistantMessage(conversationId: string, message: string) {
+    const assistantMsg = this.messageRepository.create({
+      conversation: { id: conversationId },
+      content: message,
+      senderType: SenderType.BOT,
+    });
+
+    return await this.messageRepository.save(assistantMsg);
+  }
+
   async saveUserMessage(conversationId: string, message: string) {
     const conversation = await this.getConversation(conversationId);
 
@@ -52,6 +62,6 @@ export class ConversationService {
       senderType: SenderType.USER,
     });
 
-    return this.messageRepository.save(userMsg);
+    return await this.messageRepository.save(userMsg);
   }
 }
