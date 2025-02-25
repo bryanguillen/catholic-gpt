@@ -41,8 +41,6 @@ export class ConversationService {
   async saveUserMessage(conversationId: string, message: string) {
     const conversation = await this.getConversation(conversationId);
 
-    this.validateConversation(conversation);
-
     await this.assistantService.addUserMessageToThread(
       conversation.threadId,
       message,
@@ -55,11 +53,5 @@ export class ConversationService {
     });
 
     return this.messageRepository.save(userMsg);
-  }
-
-  validateConversation(conversation: Conversation) {
-    if (!conversation) {
-      throw new NotFoundException('Conversation not found');
-    }
   }
 }
