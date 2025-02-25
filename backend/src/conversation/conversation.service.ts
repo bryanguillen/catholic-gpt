@@ -36,9 +36,7 @@ export class ConversationService {
   async createMessageResponsePair(conversationId: string, message: string) {
     const conversation = await this.getConversation(conversationId);
 
-    if (!conversation) {
-      throw new NotFoundException('Conversation not found');
-    }
+    this.validateConversation(conversation);
 
     const response = await this.assistantService.getResponse(
       conversation.threadId,
@@ -50,6 +48,25 @@ export class ConversationService {
       message,
       response,
     );
+  }
+
+  async saveUserMessage(conversationId: string, message: string) {
+    const conversation = await this.getConversation(conversationId);
+
+    this.validateConversation(conversation);
+
+    await this.assistantService.addUserMessageToThread(
+      conversation.threadId,
+      message,
+    );
+
+    const userMsg = this.messageRepository.create({
+      conversation: { id: conversationId },
+      content: message,
+      senderType: SenderType.USER,
+    });
+
+    return this.messageRepository.save(userMsg);
   }
 
   private async getConversation(conversationId: string) {
@@ -90,6 +107,12 @@ export class ConversationService {
       throw error;
     } finally {
       await queryRunner.release();
+    }
+  }
+
+  private validateConversation(conversation: Conversation) {
+    if (!conversation) {
+      throw new NotFoundException('Conversation not found');
     }
   }
 }
