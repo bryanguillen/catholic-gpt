@@ -32,7 +32,7 @@ export class ConversationService {
     return this.conversationRepository.save(conversation);
   }
 
-  async getConversation(conversationId: string) {
+  async getConversation(conversationId: string): Promise<Conversation> | null {
     return await this.conversationRepository.findOne({
       where: { id: conversationId },
     });
