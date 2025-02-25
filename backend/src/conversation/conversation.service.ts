@@ -1,5 +1,5 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { Repository, DataSource } from 'typeorm';
+import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Conversation } from './entities/conversation.entity';
 import { Message, SenderType } from './entities/message.entity';
@@ -14,7 +14,6 @@ export class ConversationService {
     @InjectRepository(Message)
     private messageRepository: Repository<Message>,
     private appUserService: AppUserService,
-    private dataSource: DataSource,
     private assistantService: AssistantService,
   ) {}
 
