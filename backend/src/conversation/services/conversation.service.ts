@@ -29,7 +29,7 @@ export class ConversationService {
       threadId: await this.assistantService.createThread(),
     });
 
-    return this.conversationRepository.save(conversation);
+    return await this.conversationRepository.save(conversation);
   }
 
   async getConversation(conversationId: string): Promise<Conversation> | null {

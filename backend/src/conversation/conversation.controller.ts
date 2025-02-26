@@ -73,7 +73,7 @@ export class ConversationController {
       this.assistantService.streamThreadResponse(threadId).subscribe({
         next: (data) => {
           response += data;
-          observer.next({ data: response });
+          observer.next({ data });
         },
         complete: () => {
           this.eventEmitter.emit(
