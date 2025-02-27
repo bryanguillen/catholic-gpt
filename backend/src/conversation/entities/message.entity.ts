@@ -9,7 +9,7 @@ import {
 import { Conversation } from './conversation.entity';
 
 export enum SenderType {
-  BOT = 'bot',
+  ASSISTANT = 'assistant',
   USER = 'user',
 }
 
