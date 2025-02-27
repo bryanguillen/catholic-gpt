@@ -3,6 +3,7 @@ import { useState } from 'react';
 import MessageForm from './components/MessageForm';
 import Messages from './components/Messages';
 import ChatroomContainer from './components/ChatroomContainer';
+import EmptyMessages from './components/EmptyMessages';
 
 interface Message {
   id: number;
@@ -46,7 +47,11 @@ export default function Home() {
 
   return (
     <ChatroomContainer>
-      <Messages messages={messages} />
+      {messages.length > 0 ? (
+        <Messages messages={messages} />
+      ) : (
+        <EmptyMessages />
+      )}
       <MessageForm
         newMessage={newMessage}
         setNewMessage={setNewMessage}
