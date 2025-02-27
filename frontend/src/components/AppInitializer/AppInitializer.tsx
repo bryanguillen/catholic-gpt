@@ -1,6 +1,8 @@
 import { useActionState, useEffect } from 'react';
 import useLocalStorageState from 'use-local-storage-state';
 
+import { PageLoader } from '@/components/PageLoader';
+
 interface OwnProps {
   children: React.ReactNode;
 }
@@ -20,7 +22,7 @@ export const AppInitializer = ({ children }: OwnProps) => {
   }, [userId, setUserId, getUserIdFromServer]);
 
   if (!userId || isPending) {
-    return <div>Loading...</div>;
+    return <PageLoader data-testid="app-initializer-loader" />;
   }
 
   return children;
