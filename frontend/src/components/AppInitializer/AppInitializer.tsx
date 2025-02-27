@@ -11,7 +11,7 @@ export const AppInitializer = ({ children }: OwnProps) => {
   const [userId, setUserId] = useLocalStorageState('userId', {
     defaultValue: '',
   });
-  const [_, getUserIdFromServer, isPending] = useActionState(async () => {
+  const [, getUserIdFromServer, isPending] = useActionState(async () => {
     setUserId(await getUserId());
   }, null);
 
