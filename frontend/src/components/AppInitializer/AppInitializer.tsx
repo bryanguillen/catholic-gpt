@@ -39,5 +39,4 @@ const getUserId = async () => {
   return data.id;
 };
 
-// eslint-disable-next-line react-refresh/only-export-components
 export { AppInitializer };
