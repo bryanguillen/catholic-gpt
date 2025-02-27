@@ -42,7 +42,7 @@ export class ConversationService {
     const assistantMsg = this.messageRepository.create({
       conversation: { id: conversationId },
       content: message,
-      senderType: SenderType.BOT,
+      senderType: SenderType.ASSISTANT,
     });
 
     return await this.messageRepository.save(assistantMsg);
