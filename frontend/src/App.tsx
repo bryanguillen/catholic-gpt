@@ -1,5 +1,11 @@
+import { AppInitializer } from './components/AppInitializer/AppInitializer';
+
 const App = () => {
-  return <div className="bg-red-500">Hello world!</div>;
+  return (
+    <AppInitializer>
+      <div className="bg-red-500">Hello world!</div>
+    </AppInitializer>
+  );
 };
 
 export default App;
