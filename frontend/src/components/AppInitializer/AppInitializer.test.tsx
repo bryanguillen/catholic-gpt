@@ -36,11 +36,15 @@ describe('AppInitializer', () => {
   });
 
   it('does not make the network call and shows children if the page is loaded with local storage', async () => {
+    localStorage.setItem('userId', '123');
+
     render(
       <AppInitializer>
         <div data-testid="children">Children</div>
       </AppInitializer>
     );
+
+    expect(global.fetch).not.toHaveBeenCalled();
 
     expect(screen.getByTestId('children')).toBeInTheDocument();
   });
