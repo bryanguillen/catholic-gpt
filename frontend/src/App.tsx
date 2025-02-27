@@ -1,9 +1,10 @@
 import { AppInitializer } from '@/components';
+import Chatroom from '@/components/Chatroom.temp';
 
 const App = () => {
   return (
     <AppInitializer>
-      <div className="bg-red-500">Hello world!</div>
+      <Chatroom />
     </AppInitializer>
   );
 };
