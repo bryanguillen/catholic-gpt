@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import { ScrollArea } from '@/components/ui/scroll-area';
 
 interface Message {
@@ -14,13 +14,9 @@ interface MessagesProps {
 export default function Messages({ messages }: MessagesProps) {
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
-  const scrollToBottom = useCallback(() => {
+  useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages.length]);
-
-  useEffect(() => {
-    scrollToBottom();
-  }, [scrollToBottom]);
 
   return (
     <ScrollArea className="flex-1 p-4">
