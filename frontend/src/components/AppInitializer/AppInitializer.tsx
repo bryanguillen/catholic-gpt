@@ -11,6 +11,8 @@ export const AppInitializer = ({ children }: OwnProps) => {
   const [userId, setUserId] = useLocalStorageState('userId', {
     defaultValue: '',
   });
+  // HACK: Assume happy path for beta version
+  // TODO: Remove this once we have a proper auth flow
   const [, getUserIdFromServer, isPending] = useActionState(async () => {
     setUserId(await getUserId());
   }, null);
@@ -28,6 +30,7 @@ export const AppInitializer = ({ children }: OwnProps) => {
   return children;
 };
 
+// HACK: Assume happy path for beta version
 const getUserId = async () => {
   const response = await fetch(`${import.meta.env.VITE_API_URL}/app-user`, {
     method: 'POST',
