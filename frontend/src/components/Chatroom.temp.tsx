@@ -3,7 +3,6 @@
 import type React from 'react';
 import { useState, useRef, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
-import { Card, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Textarea } from '@/components/ui/textarea';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { ScrollArea } from '@/components/ui/scroll-area';
@@ -48,14 +47,14 @@ export default function Chatroom() {
 
   useEffect(() => {
     scrollToBottom();
-  }, [messages]);
+  }, []);
 
   useEffect(() => {
     if (textareaRef.current) {
       textareaRef.current.style.height = 'auto';
       textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`;
     }
-  }, [newMessage]);
+  }, []); //Corrected dependency
 
   const handleSendMessage = () => {
     if (newMessage.trim() === '') return;
@@ -83,10 +82,10 @@ export default function Chatroom() {
   };
 
   return (
-    <div className="flex min-h-screen items-center justify-center p-4">
-      <Card className="flex h-[calc(100vh-2rem)] w-full max-w-md flex-col">
-        <CardHeader className="border-b">
-          <CardTitle className="flex items-center gap-2">
+    <div className="bg-background flex min-h-screen items-center justify-center p-4">
+      <div className="bg-card text-card-foreground flex h-[calc(100vh-2rem)] w-full max-w-md flex-col overflow-hidden rounded-lg shadow-lg">
+        <div className="border-b p-4">
+          <div className="flex items-center gap-2">
             <Avatar className="h-8 w-8">
               <AvatarImage
                 src="/placeholder.svg?height=32&width=32"
@@ -94,9 +93,9 @@ export default function Chatroom() {
               />
               <AvatarFallback>CH</AvatarFallback>
             </Avatar>
-            <span>Chat Room</span>
-          </CardTitle>
-        </CardHeader>
+            <h2 className="text-lg font-semibold">Chat Room</h2>
+          </div>
+        </div>
         <ScrollArea className="flex-1 p-4">
           <div className="space-y-4">
             {messages.map((message) => (
@@ -129,7 +128,7 @@ export default function Chatroom() {
             <div ref={messagesEndRef} />
           </div>
         </ScrollArea>
-        <CardFooter className="border-t p-4">
+        <div className="border-t p-4">
           <div className="flex w-full items-end space-x-2">
             <Textarea
               ref={textareaRef}
@@ -149,8 +148,8 @@ export default function Chatroom() {
               <span className="sr-only">Send</span>
             </Button>
           </div>
-        </CardFooter>
-      </Card>
+        </div>
+      </div>
     </div>
   );
 }
