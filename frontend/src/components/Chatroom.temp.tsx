@@ -4,7 +4,6 @@ import type React from 'react';
 import { useState, useRef, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Send } from 'lucide-react';
 
@@ -86,14 +85,7 @@ export default function Chatroom() {
       <div className="bg-card text-card-foreground flex h-[calc(100vh-2rem)] w-full max-w-md flex-col overflow-hidden rounded-lg shadow-lg">
         <div className="border-b p-4">
           <div className="flex items-center gap-2">
-            <Avatar className="h-8 w-8">
-              <AvatarImage
-                src="/placeholder.svg?height=32&width=32"
-                alt="Avatar"
-              />
-              <AvatarFallback>CH</AvatarFallback>
-            </Avatar>
-            <h2 className="text-lg font-semibold">Chat Room</h2>
+            <h2 className="text-lg font-semibold">CatholicGPT</h2>
           </div>
         </div>
         <ScrollArea className="flex-1 p-4">
