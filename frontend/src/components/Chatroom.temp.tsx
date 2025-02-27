@@ -1,5 +1,3 @@
-'use client';
-
 import type React from 'react';
 import { useState, useRef, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
@@ -11,7 +9,6 @@ interface Message {
   id: number;
   content: string;
   sender: 'user' | 'other';
-  timestamp: Date;
 }
 
 export default function Chatroom() {
@@ -20,20 +17,17 @@ export default function Chatroom() {
       id: 1,
       content: 'Hey there! How are you doing today?',
       sender: 'other',
-      timestamp: new Date(Date.now() - 1000 * 60 * 5),
     },
     {
       id: 2,
       content: "I'm doing great, thanks for asking! How about you?",
       sender: 'user',
-      timestamp: new Date(Date.now() - 1000 * 60 * 4),
     },
     {
       id: 3,
       content:
         'Pretty good! Just working on some new projects. Have you seen the latest updates?',
       sender: 'other',
-      timestamp: new Date(Date.now() - 1000 * 60 * 3),
     },
   ]);
   const [newMessage, setNewMessage] = useState('');
@@ -48,13 +42,6 @@ export default function Chatroom() {
     scrollToBottom();
   }, []);
 
-  useEffect(() => {
-    if (textareaRef.current) {
-      textareaRef.current.style.height = 'auto';
-      textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`;
-    }
-  }, []); //Corrected dependency
-
   const handleSendMessage = () => {
     if (newMessage.trim() === '') return;
 
@@ -62,7 +49,6 @@ export default function Chatroom() {
       id: messages.length + 1,
       content: newMessage,
       sender: 'user',
-      timestamp: new Date(),
     };
 
     setMessages([...messages, message]);
@@ -76,13 +62,9 @@ export default function Chatroom() {
     }
   };
 
-  const formatTime = (date: Date) => {
-    return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-  };
-
   return (
-    <div className="bg-background flex min-h-screen items-center justify-center p-4">
-      <div className="bg-card text-card-foreground flex h-[calc(100vh-2rem)] w-full max-w-md flex-col overflow-hidden rounded-lg shadow-lg">
+    <div className="bg-background min-h-screen items-center p-4">
+      <div className="bg-card text-card-foreground flex h-[calc(100vh-2rem)] w-full flex-col overflow-hidden rounded-lg shadow-lg">
         <div className="border-b p-4">
           <div className="flex items-center gap-2">
             <h2 className="text-lg font-semibold">CatholicGPT</h2>
@@ -96,7 +78,7 @@ export default function Chatroom() {
                 className={`flex ${message.sender === 'user' ? 'justify-end' : 'justify-start'}`}
               >
                 <div
-                  className={`max-w-[80%] rounded-lg px-4 py-2 ${
+                  className={`max-w-[90%] rounded-lg px-4 py-2 ${
                     message.sender === 'user'
                       ? 'bg-primary text-primary-foreground'
                       : 'bg-muted'
@@ -104,15 +86,6 @@ export default function Chatroom() {
                 >
                   <div className="mb-1 whitespace-pre-wrap">
                     {message.content}
-                  </div>
-                  <div
-                    className={`text-xs ${
-                      message.sender === 'user'
-                        ? 'text-primary-foreground/70'
-                        : 'text-muted-foreground'
-                    } text-right`}
-                  >
-                    {formatTime(message.timestamp)}
                   </div>
                 </div>
               </div>
@@ -127,7 +100,7 @@ export default function Chatroom() {
               value={newMessage}
               onChange={(e) => setNewMessage(e.target.value)}
               onKeyDown={handleKeyDown}
-              placeholder="Type your message..."
+              placeholder="E.g. What is the Catholic Church?"
               className="max-h-[10rem] min-h-[2.5rem] flex-1 resize-none"
               rows={1}
             />
