@@ -1,10 +1,10 @@
 import { AppInitializer } from '@/components';
-import Chatroom from '@/components/Chatroom.temp';
+import Home from '@/pages/home/Home';
 
 const App = () => {
   return (
     <AppInitializer>
-      <Chatroom />
+      <Home />
     </AppInitializer>
   );
 };
