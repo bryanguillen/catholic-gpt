@@ -1,5 +1,5 @@
 import { AppInitializer } from '@/components';
-import Home from '@/pages/home/Home';
+import Home from '@/pages/home';
 
 const App = () => {
   return (
