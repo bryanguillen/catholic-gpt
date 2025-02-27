@@ -7,7 +7,7 @@ interface OwnProps {
   children: React.ReactNode;
 }
 
-export const AppInitializer = ({ children }: OwnProps) => {
+function AppInitializer({ children }: OwnProps) {
   const [userId, setUserId] = useLocalStorageState('userId', {
     defaultValue: '',
   });
@@ -28,7 +28,7 @@ export const AppInitializer = ({ children }: OwnProps) => {
   }
 
   return children;
-};
+}
 
 // HACK: Assume happy path for beta version
 const getUserId = async () => {
@@ -38,3 +38,6 @@ const getUserId = async () => {
   const data = await response.json();
   return data.id;
 };
+
+// eslint-disable-next-line react-refresh/only-export-components
+export { AppInitializer };
