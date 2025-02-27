@@ -1,4 +1,4 @@
-import { AppInitializer } from './components/AppInitializer/AppInitializer';
+import { AppInitializer } from '@/components';
 
 const App = () => {
   return (
