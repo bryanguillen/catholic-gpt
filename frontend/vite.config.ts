@@ -16,6 +16,6 @@ export default defineConfig({
   test: {
     globals: true,
     environment: 'jsdom',
-    setupFiles: ['./src/setupTests.ts', 'vitest-localstorage-mock'],
+    setupFiles: ['./src/setup-tests.ts', 'vitest-localstorage-mock'],
   },
 });
