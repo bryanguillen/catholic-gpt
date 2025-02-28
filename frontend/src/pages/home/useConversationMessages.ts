@@ -28,7 +28,7 @@ export const useConversationMessages = (): UseConversationMessagesResults => {
     ...optimisticMessage,
   ]);
 
-  const [appUserId] = useLocalStorageState('appUserId');
+  const [appUserId] = useLocalStorageState('userId');
 
   const createConversation = async (message: string) => {
     try {
@@ -63,6 +63,9 @@ export const useConversationMessages = (): UseConversationMessagesResults => {
         {
           method: 'POST',
           body: JSON.stringify(request),
+          headers: {
+            'Content-Type': 'application/json',
+          },
         }
       );
 
@@ -73,7 +76,10 @@ export const useConversationMessages = (): UseConversationMessagesResults => {
       const data: CreateConversationResponseDto = await response.json();
 
       setConversationId(data.conversationId);
-      setMessages([data.firstUserMessage, assistantResponse]);
+      setMessages([
+        data.firstUserMessage,
+        { ...assistantResponse, conversationId: data.conversationId },
+      ]);
     } catch (error) {
       console.error(error);
     } finally {
