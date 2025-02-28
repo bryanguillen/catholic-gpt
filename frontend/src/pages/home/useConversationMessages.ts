@@ -78,7 +78,11 @@ export const useConversationMessages = (): UseConversationMessagesResults => {
       setConversationId(data.conversationId);
       setMessages([
         data.firstUserMessage,
-        { ...assistantResponse, conversationId: data.conversationId },
+        {
+          ...assistantResponse,
+          conversationId: data.conversationId,
+          id: uuidv4(),
+        },
       ]);
     });
   };
