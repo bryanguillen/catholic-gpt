@@ -10,8 +10,6 @@ export function AssistantMessage({ conversationId }: AssistantMessageProps) {
   const [responseText, setResponseText] = useState('');
 
   useEffect(() => {
-    console.log('conversationId', conversationId);
-
     // HACK: ConversationId will be empty when the message is first created
     if (!conversationId) return;
 

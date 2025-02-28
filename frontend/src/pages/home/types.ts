@@ -22,6 +22,14 @@ export interface MessageDto {
   senderType: SenderType;
 }
 
+export interface SaveUserMessageRequestDto {
+  message: string;
+}
+
+export interface SaveUserMessageResponseDto {
+  data: MessageDto;
+}
+
 export enum SenderType {
   USER = 'user',
   ASSISTANT = 'assistant',

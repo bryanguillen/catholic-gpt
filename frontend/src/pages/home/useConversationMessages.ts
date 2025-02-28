@@ -7,6 +7,8 @@ import {
   CreateConversationRequestDto,
   CreateConversationResponseDto,
   SenderType,
+  SaveUserMessageRequestDto,
+  SaveUserMessageResponseDto,
 } from './types';
 
 interface UseConversationMessagesResults {
@@ -42,7 +44,6 @@ export const useConversationMessages = (): UseConversationMessagesResults => {
       };
 
       setOptimisticMessages([
-        ...optimisticMessages,
         {
           id: uuidv4(),
           content: message,
@@ -87,12 +88,68 @@ export const useConversationMessages = (): UseConversationMessagesResults => {
     });
   };
 
+  const sendMessageToConversation = async (message: string) => {
+    if (!conversationId) return;
+
+    startTransition(async () => {
+      const assistantResponse: MessageDto = {
+        id: uuidv4(),
+        content: '',
+        conversationId,
+        createdAt: new Date().toISOString(),
+        senderType: SenderType.ASSISTANT,
+      };
+
+      setOptimisticMessages([
+        {
+          id: uuidv4(),
+          content: message,
+          conversationId,
+          createdAt: new Date().toISOString(),
+          senderType: SenderType.USER,
+        },
+        assistantResponse,
+      ]);
+
+      const request: SaveUserMessageRequestDto = {
+        message,
+      };
+
+      const response = await fetch(
+        `${import.meta.env.VITE_API_URL}/conversation/${conversationId}/message`,
+        {
+          method: 'POST',
+          body: JSON.stringify(request),
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error('Could not send message to conversation');
+      }
+
+      const data: SaveUserMessageResponseDto = await response.json();
+
+      setMessages((prev) => [
+        ...prev,
+        data.data,
+        { ...assistantResponse, id: uuidv4() },
+      ]);
+    });
+  };
+
   return {
     conversationId,
     isPending,
     messages: optimisticMessages,
     sendMessage: async (message: string) => {
-      createConversation(message);
+      if (!conversationId) {
+        await createConversation(message);
+      } else {
+        await sendMessageToConversation(message);
+      }
     },
   };
 };
