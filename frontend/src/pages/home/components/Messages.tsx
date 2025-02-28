@@ -1,13 +1,7 @@
 import { useEffect, useRef } from 'react';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { MessageDto, SenderType } from '../types';
-
-interface Message {
-  id: number;
-  content: string;
-  sender: 'user' | 'other';
-}
-
+import { AssistantMessage } from './AssistantMessage';
 interface MessagesProps {
   messages: MessageDto[];
 }
@@ -23,7 +17,13 @@ export default function Messages({ messages }: MessagesProps) {
     <ScrollArea className="flex-1 p-4">
       <div className="space-y-4">
         {messages.map(({ id, ...message }) => (
-          <Message key={id} {...message} />
+          <MessageContainer key={id} {...message}>
+            {message.senderType === SenderType.ASSISTANT ? (
+              <AssistantMessage />
+            ) : (
+              message.content
+            )}
+          </MessageContainer>
         ))}
         <div ref={messagesEndRef} />
       </div>
@@ -31,7 +31,12 @@ export default function Messages({ messages }: MessagesProps) {
   );
 }
 
-function Message({ senderType, content }: Omit<MessageDto, 'id'>) {
+interface MessageContainerProps {
+  children: string | React.ReactNode;
+  senderType: SenderType;
+}
+
+function MessageContainer({ senderType, children }: MessageContainerProps) {
   return (
     <div
       className={`flex ${senderType === SenderType.USER ? 'justify-end' : 'justify-start'}`}
@@ -39,7 +44,7 @@ function Message({ senderType, content }: Omit<MessageDto, 'id'>) {
       <div
         className={`max-w-[90%] rounded-lg px-4 py-2 ${senderType === SenderType.USER ? 'bg-primary text-primary-foreground' : 'bg-muted'}`}
       >
-        <div className="mb-1 whitespace-pre-wrap">{content}</div>
+        <div className="mb-1 whitespace-pre-wrap">{children}</div>
       </div>
     </div>
   );
