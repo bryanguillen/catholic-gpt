@@ -1,4 +1,4 @@
-import { useOptimistic, useState } from 'react';
+import { useOptimistic, useState, useTransition } from 'react';
 import useLocalStorageState from 'use-local-storage-state';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -18,7 +18,6 @@ interface UseConversationMessagesResults {
 
 export const useConversationMessages = (): UseConversationMessagesResults => {
   const [conversationId, setConversationId] = useState<string | null>(null);
-  const [isPending, setIsPending] = useState(false);
   const [messages, setMessages] = useState<MessageDto[]>([]);
   const [optimisticMessages, setOptimisticMessages] = useOptimistic<
     MessageDto[],
@@ -30,8 +29,10 @@ export const useConversationMessages = (): UseConversationMessagesResults => {
 
   const [appUserId] = useLocalStorageState('userId');
 
+  const [isPending, startTransition] = useTransition();
+
   const createConversation = async (message: string) => {
-    try {
+    startTransition(async () => {
       const assistantResponse: MessageDto = {
         id: uuidv4(),
         content: '',
@@ -51,7 +52,6 @@ export const useConversationMessages = (): UseConversationMessagesResults => {
         },
         assistantResponse,
       ]);
-      setIsPending(true);
 
       const request: CreateConversationRequestDto = {
         appUserId: (appUserId || '') as string,
@@ -80,11 +80,7 @@ export const useConversationMessages = (): UseConversationMessagesResults => {
         data.firstUserMessage,
         { ...assistantResponse, conversationId: data.conversationId },
       ]);
-    } catch (error) {
-      console.error(error);
-    } finally {
-      setIsPending(false);
-    }
+    });
   };
 
   return {
