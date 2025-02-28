@@ -3,12 +3,14 @@ import { Button } from '@/components/ui/button';
 import { Send } from 'lucide-react';
 
 interface MessageFormProps {
+  disabled: boolean;
   newMessage: string;
   setNewMessage: (message: string) => void;
   handleSendMessage: () => void;
 }
 
 export default function MessageForm({
+  disabled,
   newMessage,
   setNewMessage,
   handleSendMessage,
@@ -30,11 +32,12 @@ export default function MessageForm({
           placeholder="E.g. What is the Catholic Church?"
           className="max-h-[10rem] min-h-[2.5rem] flex-1 resize-none"
           rows={1}
+          disabled={disabled}
         />
         <Button
           size="icon"
           onClick={handleSendMessage}
-          disabled={!newMessage.trim()}
+          disabled={!newMessage.trim() || disabled}
         >
           <Send className="h-4 w-4" />
           <span className="sr-only">Send</span>

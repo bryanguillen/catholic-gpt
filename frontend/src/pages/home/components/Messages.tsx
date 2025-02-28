@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react';
 import { ScrollArea } from '@/components/ui/scroll-area';
+import { MessageDto, SenderType } from '../types';
 
 interface Message {
   id: number;
@@ -8,7 +9,7 @@ interface Message {
 }
 
 interface MessagesProps {
-  messages: Message[];
+  messages: MessageDto[];
 }
 
 export default function Messages({ messages }: MessagesProps) {
@@ -30,13 +31,13 @@ export default function Messages({ messages }: MessagesProps) {
   );
 }
 
-function Message({ sender, content }: Omit<Message, 'id'>) {
+function Message({ senderType, content }: Omit<MessageDto, 'id'>) {
   return (
     <div
-      className={`flex ${sender === 'user' ? 'justify-end' : 'justify-start'}`}
+      className={`flex ${senderType === SenderType.USER ? 'justify-end' : 'justify-start'}`}
     >
       <div
-        className={`max-w-[90%] rounded-lg px-4 py-2 ${sender === 'user' ? 'bg-primary text-primary-foreground' : 'bg-muted'}`}
+        className={`max-w-[90%] rounded-lg px-4 py-2 ${senderType === SenderType.USER ? 'bg-primary text-primary-foreground' : 'bg-muted'}`}
       >
         <div className="mb-1 whitespace-pre-wrap">{content}</div>
       </div>
