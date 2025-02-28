@@ -1,6 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { Repository } from 'typeorm';
-import { InjectRepository } from '@nestjs/typeorm';
+import { Repository, DataSource } from 'typeorm';
+import { InjectRepository, InjectDataSource } from '@nestjs/typeorm';
 import { Conversation } from '../entities/conversation.entity';
 import { Message, SenderType } from '../entities/message.entity';
 import { AppUserService } from '../../app-user/app-user.service';
@@ -15,21 +15,44 @@ export class ConversationService {
     private messageRepository: Repository<Message>,
     private appUserService: AppUserService,
     private assistantService: AssistantService,
+    @InjectDataSource() private dataSource: DataSource,
   ) {}
 
-  async createConversation(appUserId: string) {
+  /**
+   * TODO: Cleanup so that the threadId and message are rolledback if transaction fails
+   */
+  async createConversation(appUserId: string, initialMessageContent: string) {
     const appUser = await this.appUserService.getAppUser(appUserId);
 
     if (!appUser) {
       throw new NotFoundException('App user not found');
     }
 
-    const conversation = this.conversationRepository.create({
-      appUser,
-      threadId: await this.assistantService.createThread(),
-    });
+    const threadId = await this.assistantService.createThread();
+    await this.assistantService.addUserMessageToThread(
+      threadId,
+      initialMessageContent,
+    );
 
-    return await this.conversationRepository.save(conversation);
+    return this.dataSource.transaction(async (manager) => {
+      const conversation = new Conversation();
+      conversation.appUser = appUser;
+      conversation.threadId = threadId;
+
+      const savedConversation = await manager.save(Conversation, conversation);
+
+      const message = new Message();
+      message.content = initialMessageContent;
+      message.conversation = savedConversation;
+      message.senderType = SenderType.USER;
+
+      await manager.save(Message, message);
+
+      // Return the conversation with the first message loaded
+      savedConversation.messages = [message];
+
+      return savedConversation;
+    });
   }
 
   async getConversation(conversationId: string): Promise<Conversation> | null {

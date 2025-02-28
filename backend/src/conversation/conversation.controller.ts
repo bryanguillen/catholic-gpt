@@ -36,10 +36,17 @@ export class ConversationController {
   async createConversation(
     @Body() body: CreateConversationDto,
   ): Promise<CreateConversationResponseDto> {
+    const { appUserId, message } = body;
+
     const conversation = await this.conversationService.createConversation(
-      body.appUserId,
+      appUserId,
+      message,
     );
-    return { id: conversation.id };
+
+    return {
+      conversationId: conversation.id,
+      firstUserMessage: convertMessageToDto(conversation.messages[0]),
+    };
   }
 
   @Post(':conversationId/message') // interceptor not needed for this one

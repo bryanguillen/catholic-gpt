@@ -1,3 +1,6 @@
+import { MessageDto } from './message.dto';
+
 export class CreateConversationResponseDto {
-  id: string;
+  conversationId: string;
+  firstUserMessage: MessageDto;
 }
