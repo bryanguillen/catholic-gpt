@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import ReactMarkdown from 'react-markdown';
 import { LoadingDots } from '@/components/ui/loading';
 
 interface AssistantMessageProps {
@@ -36,5 +37,13 @@ export function AssistantMessage({ conversationId }: AssistantMessageProps) {
     };
   }, [conversationId]);
 
-  return <div>{!responseText ? <LoadingDots /> : <>{responseText}</>}</div>;
+  return (
+    <div>
+      {!responseText ? (
+        <LoadingDots />
+      ) : (
+        <ReactMarkdown>{responseText}</ReactMarkdown>
+      )}
+    </div>
+  );
 }
