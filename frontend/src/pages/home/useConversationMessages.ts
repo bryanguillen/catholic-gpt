@@ -1,5 +1,6 @@
 import { useOptimistic, useState } from 'react';
 import useLocalStorageState from 'use-local-storage-state';
+import { v4 as uuidv4 } from 'uuid';
 
 import {
   MessageDto,
@@ -21,23 +22,35 @@ export const useConversationMessages = (): UseConversationMessagesResults => {
   const [messages, setMessages] = useState<MessageDto[]>([]);
   const [optimisticMessages, setOptimisticMessages] = useOptimistic<
     MessageDto[],
-    MessageDto
+    MessageDto[]
   >(messages, (messages, optimisticMessage) => [
     ...messages,
-    optimisticMessage,
+    ...optimisticMessage,
   ]);
 
   const [appUserId] = useLocalStorageState('appUserId');
 
   const createConversation = async (message: string) => {
     try {
-      setOptimisticMessages({
-        id: 'optimistic-id',
-        content: message,
+      const assistantResponse: MessageDto = {
+        id: uuidv4(),
+        content: '',
         conversationId: conversationId || '',
         createdAt: new Date().toISOString(),
-        senderType: SenderType.USER,
-      });
+        senderType: SenderType.ASSISTANT,
+      };
+
+      setOptimisticMessages([
+        ...optimisticMessages,
+        {
+          id: uuidv4(),
+          content: message,
+          conversationId: conversationId || '',
+          createdAt: new Date().toISOString(),
+          senderType: SenderType.USER,
+        },
+        assistantResponse,
+      ]);
       setIsPending(true);
 
       const request: CreateConversationRequestDto = {
@@ -60,7 +73,7 @@ export const useConversationMessages = (): UseConversationMessagesResults => {
       const data: CreateConversationResponseDto = await response.json();
 
       setConversationId(data.conversationId);
-      setMessages([data.firstUserMessage]);
+      setMessages([data.firstUserMessage, assistantResponse]);
     } catch (error) {
       console.error(error);
     } finally {
