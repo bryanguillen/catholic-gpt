@@ -38,13 +38,9 @@ export function AssistantMessage({ conversationId }: AssistantMessageProps) {
     };
   }, [conversationId, setResponseText]);
 
-  return (
-    <div>
-      {!responseText ? (
-        <LoadingDots />
-      ) : (
-        <ReactMarkdown>{responseText}</ReactMarkdown>
-      )}
-    </div>
+  return !responseText ? (
+    <LoadingDots />
+  ) : (
+    <ReactMarkdown>{responseText}</ReactMarkdown>
   );
 }
