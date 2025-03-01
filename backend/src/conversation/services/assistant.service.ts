@@ -37,6 +37,7 @@ export class AssistantService {
 
       runStream
         .on('textDelta', (textDelta) => observer.next(textDelta.value))
+        .on('textDone', () => observer.next('[DONE]'))
         .on('end', () => observer.complete())
         .on('error', (error) => observer.error(error));
 
