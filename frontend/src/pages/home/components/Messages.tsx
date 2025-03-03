@@ -19,7 +19,10 @@ export default function Messages({ messages }: MessagesProps) {
         {messages.map(({ id, ...message }) => (
           <MessageContainer key={id} {...message}>
             {message.senderType === SenderType.ASSISTANT ? (
-              <AssistantMessage conversationId={message.conversationId} />
+              <AssistantMessage
+                conversationId={message.conversationId}
+                messagesEndRef={messagesEndRef}
+              />
             ) : (
               message.content
             )}

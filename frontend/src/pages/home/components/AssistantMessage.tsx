@@ -1,12 +1,16 @@
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useRef, RefObject } from 'react';
 import ReactMarkdown from 'react-markdown';
 import { LoadingDots } from '@/components/ui/loading';
 
 interface AssistantMessageProps {
   conversationId: string;
+  messagesEndRef: RefObject<HTMLDivElement | null>;
 }
 
-export function AssistantMessage({ conversationId }: AssistantMessageProps) {
+export function AssistantMessage({
+  conversationId,
+  messagesEndRef,
+}: AssistantMessageProps) {
   const [responseText, setResponseText] = useState('');
   const isInitialized = useRef(false);
 
@@ -37,6 +41,12 @@ export function AssistantMessage({ conversationId }: AssistantMessageProps) {
       eventSource.close();
     };
   }, [conversationId, setResponseText]);
+
+  useEffect(() => {
+    if (messagesEndRef.current) {
+      messagesEndRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
+  }, [responseText]);
 
   return !responseText ? (
     <LoadingDots />
