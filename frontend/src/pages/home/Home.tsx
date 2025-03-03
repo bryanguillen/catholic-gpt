@@ -1,10 +1,12 @@
-import MessageForm from './components/MessageForm';
-import Messages from './components/Messages';
-import ChatroomContainer from './components/ChatroomContainer';
-import EmptyMessages from './components/EmptyMessages';
+import {
+  MessageForm,
+  Messages,
+  ChatroomContainer,
+  EmptyMessages,
+} from './components';
 import { useConversationMessages } from './useConversationMessages';
 
-export default function Home() {
+function Home() {
   const { messages, sendMessage, isPending } = useConversationMessages();
 
   return (
@@ -21,3 +23,5 @@ export default function Home() {
     </ChatroomContainer>
   );
 }
+
+export { Home };

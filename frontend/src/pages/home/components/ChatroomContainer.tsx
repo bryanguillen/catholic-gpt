@@ -2,9 +2,7 @@ interface ChatroomContainerProps {
   children: React.ReactNode;
 }
 
-export default function ChatroomContainer({
-  children,
-}: ChatroomContainerProps) {
+function ChatroomContainer({ children }: ChatroomContainerProps) {
   return (
     <div className="bg-background min-h-screen items-center p-4">
       <div className="bg-card text-card-foreground flex h-[calc(100vh-2rem)] w-full flex-col overflow-hidden rounded-lg shadow-lg">
@@ -24,3 +22,5 @@ function ChatroomHeader() {
     </div>
   );
 }
+
+export { ChatroomContainer };

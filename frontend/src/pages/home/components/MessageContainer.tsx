@@ -5,10 +5,7 @@ interface MessageContainerProps {
   senderType: SenderType;
 }
 
-export default function MessageContainer({
-  senderType,
-  children,
-}: MessageContainerProps) {
+function MessageContainer({ senderType, children }: MessageContainerProps) {
   return (
     <div
       className={`flex ${senderType === SenderType.USER ? 'justify-end' : 'justify-start'}`}
@@ -21,3 +18,5 @@ export default function MessageContainer({
     </div>
   );
 }
+
+export { MessageContainer };

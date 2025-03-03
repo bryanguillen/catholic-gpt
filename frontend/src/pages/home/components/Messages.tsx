@@ -2,13 +2,13 @@ import { useEffect, useRef } from 'react';
 import { ScrollArea } from '@/components';
 import { MessageDto, SenderType } from '../types';
 import { AssistantMessage } from './AssistantMessage';
-import MessageContainer from './MessageContainer';
+import { MessageContainer } from './MessageContainer';
 
 interface MessagesProps {
   messages: MessageDto[];
 }
 
-export default function Messages({ messages }: MessagesProps) {
+function Messages({ messages }: MessagesProps) {
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -36,3 +36,5 @@ export default function Messages({ messages }: MessagesProps) {
     </ScrollArea>
   );
 }
+
+export { Messages };

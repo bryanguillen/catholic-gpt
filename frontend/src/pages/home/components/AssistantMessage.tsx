@@ -1,7 +1,7 @@
 import { useEffect, useState, useRef, RefObject } from 'react';
 import ReactMarkdown from 'react-markdown';
 import { LoadingDots } from '@/components';
-import MessageContainer from './MessageContainer';
+import { MessageContainer } from './MessageContainer';
 import { SenderType } from '../types';
 
 interface AssistantMessageProps {
@@ -9,7 +9,7 @@ interface AssistantMessageProps {
   messagesEndRef: RefObject<HTMLDivElement | null>;
 }
 
-export function AssistantMessage({
+function AssistantMessage({
   conversationId,
   messagesEndRef,
 }: AssistantMessageProps) {
@@ -61,3 +61,5 @@ export function AssistantMessage({
     </MessageContainer>
   );
 }
+
+export { AssistantMessage };

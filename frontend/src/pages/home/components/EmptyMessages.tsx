@@ -1,6 +1,6 @@
 import { MessageSquare } from 'lucide-react';
 
-export default function EmptyMessages() {
+function EmptyMessages() {
   return (
     <div className="flex h-full flex-col items-center justify-center p-4 text-center">
       <MessageSquare className="text-muted-foreground mb-4 h-12 w-12" />
@@ -8,3 +8,5 @@ export default function EmptyMessages() {
     </div>
   );
 }
+
+export { EmptyMessages };

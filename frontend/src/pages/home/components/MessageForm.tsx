@@ -7,10 +7,7 @@ interface MessageFormProps {
   handleSendMessage: (message: string) => void;
 }
 
-export default function MessageForm({
-  disabled,
-  handleSendMessage,
-}: MessageFormProps) {
+function MessageForm({ disabled, handleSendMessage }: MessageFormProps) {
   const [message, setMessage] = useState('');
 
   const sendMessageWrapper = () => {
@@ -49,3 +46,5 @@ export default function MessageForm({
     </div>
   );
 }
+
+export { MessageForm };
