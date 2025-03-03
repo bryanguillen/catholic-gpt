@@ -1,6 +1,8 @@
 import { useEffect, useState, useRef, RefObject } from 'react';
 import ReactMarkdown from 'react-markdown';
 import { LoadingDots } from '@/components/ui/loading';
+import MessageContainer from './MessageContainer';
+import { SenderType } from '../types';
 
 interface AssistantMessageProps {
   conversationId: string;
@@ -49,9 +51,13 @@ export function AssistantMessage({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [responseText]);
 
-  return !responseText ? (
-    <LoadingDots />
-  ) : (
-    <ReactMarkdown>{responseText}</ReactMarkdown>
+  return (
+    <MessageContainer senderType={SenderType.ASSISTANT}>
+      {!responseText ? (
+        <LoadingDots />
+      ) : (
+        <ReactMarkdown>{responseText}</ReactMarkdown>
+      )}
+    </MessageContainer>
   );
 }
