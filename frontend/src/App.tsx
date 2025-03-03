@@ -3,10 +3,12 @@ import { Home } from '@/pages/home';
 
 const App = () => {
   return (
-    <AppInitializer>
-      <Home />
-      <Toaster />
-    </AppInitializer>
+    <>
+      <Toaster closeButton />
+      <AppInitializer>
+        <Home />
+      </AppInitializer>
+    </>
   );
 };
 
