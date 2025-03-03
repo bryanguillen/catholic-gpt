@@ -1,4 +1,5 @@
 import { useRef, useState, useEffect } from 'react';
+import { toast } from 'sonner';
 
 const useAssistantResponseStream = (conversationId: string) => {
   const [responseText, setResponseText] = useState('');
@@ -28,6 +29,9 @@ const useAssistantResponseStream = (conversationId: string) => {
     };
 
     eventSource.onerror = () => {
+      toast.error('Error while streaming', {
+        description: 'Closed stream due to error. Try again.',
+      });
       eventSource.close();
     };
   }, [conversationId, setResponseText]);
