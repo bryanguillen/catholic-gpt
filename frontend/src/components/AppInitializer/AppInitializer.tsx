@@ -1,7 +1,7 @@
 import { useActionState, useEffect } from 'react';
 import useLocalStorageState from 'use-local-storage-state';
 
-import { LoadingSpinner } from '@/components/ui/loading';
+import { LoadingSpinner } from '@/components';
 
 interface OwnProps {
   children: React.ReactNode;

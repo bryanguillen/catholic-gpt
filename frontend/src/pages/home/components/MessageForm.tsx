@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { Send } from 'lucide-react';
-import { Textarea } from '@/components/ui/textarea';
-import { Button } from '@/components/ui/button';
+import { Textarea, Button } from '@/components';
 
 interface MessageFormProps {
   disabled: boolean;

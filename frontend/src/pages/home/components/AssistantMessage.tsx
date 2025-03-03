@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef, RefObject } from 'react';
 import ReactMarkdown from 'react-markdown';
-import { LoadingDots } from '@/components/ui/loading';
+import { LoadingDots } from '@/components';
 import MessageContainer from './MessageContainer';
 import { SenderType } from '../types';
 
