@@ -40,6 +40,7 @@ const getUserId = async () => {
     const data = await response.json();
     return data.id;
   } catch (error) {
+    console.log('error: ', error);
     toast.error('Failed to create your user', {
       description: 'Please try again by refreshing',
     });
