@@ -27,7 +27,16 @@ export const useConversationMessages = (): UseConversationMessagesResults => {
   >(messages, (messages, optimisticMessages) => {
     const realIds = new Set(messages.map((item) => item.id));
 
-    // Remove optimistic items if a "real" item with the same ID arrives.
+    /**
+     * If duplicate found, means that the optimistic message has been sent and received.
+     * Thus, the optimistic message is no longer needed.
+     *
+     * There is a moment where both the optimistic and real messages will exists, and thus, if we simply
+     * merge the optimistic messages, we will have duplicate messages in the UI,
+     * which creates problems with the keys for the messages.
+     *
+     * To avoid this, we return the real messages only if a duplicate is found.
+     */
     const duplicateFound = optimisticMessages.some((item) =>
       realIds.has(item.id)
     );
