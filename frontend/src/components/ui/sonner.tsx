@@ -17,6 +17,8 @@ function Toaster({ ...props }: ToasterProps) {
             'group-[.toast]:bg-primary group-[.toast]:text-primary-foreground font-medium',
           cancelButton:
             'group-[.toast]:bg-muted group-[.toast]:text-muted-foreground font-medium',
+          error:
+            'group-[.toaster]:bg-destructive group-[.toaster]:text-destructive-foreground',
         },
       }}
       {...props}
