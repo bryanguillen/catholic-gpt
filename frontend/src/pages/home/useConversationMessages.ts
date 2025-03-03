@@ -24,10 +24,18 @@ export const useConversationMessages = (): UseConversationMessagesResults => {
   const [optimisticMessages, setOptimisticMessages] = useOptimistic<
     MessageDto[],
     MessageDto[]
-  >(messages, (messages, optimisticMessage) => [
-    ...messages,
-    ...optimisticMessage,
-  ]);
+  >(messages, (messages, optimisticMessages) => {
+    const realIds = new Set(messages.map((item) => item.id));
+
+    // Remove optimistic items if a "real" item with the same ID arrives.
+    const duplicateFound = optimisticMessages.some((item) =>
+      realIds.has(item.id)
+    );
+
+    return duplicateFound
+      ? [...messages]
+      : [...messages, ...optimisticMessages];
+  });
 
   const [appUserId] = useLocalStorageState('userId');
 
@@ -82,7 +90,6 @@ export const useConversationMessages = (): UseConversationMessagesResults => {
         {
           ...assistantResponse,
           conversationId: data.conversationId,
-          id: uuidv4(),
         },
       ]);
     });
@@ -132,11 +139,7 @@ export const useConversationMessages = (): UseConversationMessagesResults => {
 
       const data: SaveUserMessageResponseDto = await response.json();
 
-      setMessages((prev) => [
-        ...prev,
-        data.data,
-        { ...assistantResponse, id: uuidv4() },
-      ]);
+      setMessages((prev) => [...prev, data.data, assistantResponse]);
     });
   };
 
