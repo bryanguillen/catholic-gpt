@@ -1,6 +1,7 @@
 import { useOptimistic, useState, useTransition } from 'react';
 import useLocalStorageState from 'use-local-storage-state';
 import { v4 as uuidv4 } from 'uuid';
+import { toast } from 'sonner';
 
 import {
   MessageDto,
@@ -157,10 +158,24 @@ export const useConversationMessages = (): UseConversationMessagesResults => {
     isPending,
     messages: optimisticMessages,
     sendMessage: async (message: string) => {
-      if (!conversationId) {
-        await createConversation(message);
-      } else {
-        await sendMessageToConversation(message);
+      try {
+        if (!conversationId) {
+          await createConversation(message);
+        } else {
+          await sendMessageToConversation(message);
+        }
+      } catch (error) {
+        console.log('error: ', error);
+        if (!conversationId) {
+          toast.error('Failed to create conversation', {
+            description: 'Refresh your screen and try again.',
+          });
+        } else {
+          toast.error('Failed to send message', {
+            description:
+              'Try again. If persistent, please share this with the team.',
+          });
+        }
       }
     },
   };
