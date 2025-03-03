@@ -1,5 +1,6 @@
 import { useActionState, useEffect } from 'react';
 import useLocalStorageState from 'use-local-storage-state';
+import { toast } from 'sonner';
 
 import { LoadingSpinner } from '@/components';
 
@@ -32,11 +33,17 @@ function AppInitializer({ children }: OwnProps) {
 
 // HACK: Assume happy path for beta version
 const getUserId = async () => {
-  const response = await fetch(`${import.meta.env.VITE_API_URL}/app-user`, {
-    method: 'POST',
-  });
-  const data = await response.json();
-  return data.id;
+  try {
+    const response = await fetch(`${import.meta.env.VITE_API_URL}/app-user`, {
+      method: 'POST',
+    });
+    const data = await response.json();
+    return data.id;
+  } catch (error) {
+    toast.error('Failed to create your user', {
+      description: 'Please try again by refreshing',
+    });
+  }
 };
 
 function PageLoader() {
