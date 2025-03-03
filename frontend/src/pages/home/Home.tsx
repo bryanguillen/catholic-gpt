@@ -4,7 +4,7 @@ import {
   ChatroomContainer,
   EmptyMessages,
 } from './components';
-import { useConversationMessages } from './useConversationMessages';
+import { useConversationMessages } from './hooks/useConversationMessages';
 
 function Home() {
   const { messages, sendMessage, isPending } = useConversationMessages();
