@@ -11,6 +11,7 @@ import {
   SaveUserMessageRequestDto,
   SaveUserMessageResponseDto,
 } from '@/types';
+import { logErrorInDev } from '@/lib/utils';
 
 interface UseConversationMessagesResults {
   conversationId: string | null;
@@ -165,7 +166,7 @@ export const useConversationMessages = (): UseConversationMessagesResults => {
           await sendMessageToConversation(message);
         }
       } catch (error) {
-        console.log('error: ', error);
+        logErrorInDev('error: ', error);
         if (!conversationId) {
           toast.error('Failed to create conversation', {
             description: 'Refresh your screen and try again.',

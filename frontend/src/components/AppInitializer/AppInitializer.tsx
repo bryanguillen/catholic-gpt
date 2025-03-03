@@ -3,6 +3,7 @@ import useLocalStorageState from 'use-local-storage-state';
 import { toast } from 'sonner';
 
 import { LoadingSpinner } from '@/components';
+import { logErrorInDev } from '@/lib/utils';
 
 interface OwnProps {
   children: React.ReactNode;
@@ -40,7 +41,7 @@ const getUserId = async () => {
     const data = await response.json();
     return data.id;
   } catch (error) {
-    console.log('error: ', error);
+    logErrorInDev('error: ', error);
     toast.error('Failed to create your user', {
       description: 'Please try again by refreshing',
     });
