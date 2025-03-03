@@ -1,4 +1,4 @@
-import { SenderType } from '../types';
+import { SenderType } from '@/types';
 
 interface MessageContainerProps {
   children: string | React.ReactNode;

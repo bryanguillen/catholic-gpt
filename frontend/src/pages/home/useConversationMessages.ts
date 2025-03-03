@@ -9,7 +9,7 @@ import {
   SenderType,
   SaveUserMessageRequestDto,
   SaveUserMessageResponseDto,
-} from './types';
+} from '@/types';
 
 interface UseConversationMessagesResults {
   conversationId: string | null;

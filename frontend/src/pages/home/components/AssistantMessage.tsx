@@ -1,8 +1,8 @@
 import { useEffect, useState, useRef, RefObject } from 'react';
 import ReactMarkdown from 'react-markdown';
 import { LoadingDots } from '@/components';
+import { SenderType } from '@/types';
 import { MessageContainer } from './MessageContainer';
-import { SenderType } from '../types';
 
 interface AssistantMessageProps {
   conversationId: string;

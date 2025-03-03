@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
 import { ScrollArea } from '@/components';
-import { MessageDto, SenderType } from '../types';
+import { MessageDto, SenderType } from '@/types';
 import { AssistantMessage } from './AssistantMessage';
 import { MessageContainer } from './MessageContainer';
 
