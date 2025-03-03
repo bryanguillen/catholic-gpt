@@ -1,7 +1,7 @@
 import { useActionState, useEffect } from 'react';
 import useLocalStorageState from 'use-local-storage-state';
 
-import { PageLoader } from '@/components/PageLoader';
+import { LoadingSpinner } from '@/components/ui/loading';
 
 interface OwnProps {
   children: React.ReactNode;
@@ -24,7 +24,7 @@ function AppInitializer({ children }: OwnProps) {
   }, [userId, setUserId, getUserIdFromServer]);
 
   if (!userId || isPending) {
-    return <PageLoader data-testid="app-initializer-loader" />;
+    return <PageLoader />;
   }
 
   return children;
@@ -38,5 +38,16 @@ const getUserId = async () => {
   const data = await response.json();
   return data.id;
 };
+
+function PageLoader() {
+  return (
+    <div
+      data-testid="app-initializer-loader"
+      className={'flex h-screen w-screen items-center justify-center'}
+    >
+      <LoadingSpinner />
+    </div>
+  );
+}
 
 export { AppInitializer };
