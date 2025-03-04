@@ -16,7 +16,7 @@ import { SaveUserMessageRequestDto } from './dto/save-user-message-request.dto';
 import { SaveUserMessageResponseDto } from './dto/save-user-message-response.dto';
 import { StreamAssistantResponseDto } from './dto/stream-assistant-response.dto';
 import { convertMessageToDto } from './conversation.utils';
-import { AssistantService } from './services/assistant.service';
+import { AssistantService } from './services/assistant/assistant.service';
 import { ThreadIdGuard } from './guards/thread-id.guard';
 import { ThreadIdInterceptor } from './interceptors/thread-id.interceptor';
 import {

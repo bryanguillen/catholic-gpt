@@ -5,7 +5,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { Conversation } from './entities/conversation.entity';
 import { Message } from './entities/message.entity';
 import { AppUserModule } from '../app-user/app-user.module';
-import { AssistantService } from './services/assistant.service';
+import { AssistantService } from './services/assistant/assistant.service';
 import { ResponseStreamedEventListener } from './events/response-streamed.event';
 
 @Module({

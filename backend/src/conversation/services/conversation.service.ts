@@ -4,7 +4,7 @@ import { InjectRepository, InjectDataSource } from '@nestjs/typeorm';
 import { Conversation } from '../entities/conversation.entity';
 import { Message, SenderType } from '../entities/message.entity';
 import { AppUserService } from '../../app-user/app-user.service';
-import { AssistantService } from './assistant.service';
+import { AssistantService } from './assistant/assistant.service';
 
 @Injectable()
 export class ConversationService {
