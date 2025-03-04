@@ -10,9 +10,11 @@ export class LoggerService {
     ],
     format: winston.format.combine(
       winston.format.timestamp(),
-      winston.format.printf(({ timestamp, level, message }) => {
-        return `${timestamp} [${level}] ${message}`;
-      }),
+      winston.format.printf(
+        ({ timestamp, level, message, context, ...meta }) => {
+          return `${timestamp} [${level}] ${message} ${context ? `[${context}]` : ''} ${meta ? JSON.stringify(meta) : ''}`;
+        },
+      ),
     ),
   });
 
