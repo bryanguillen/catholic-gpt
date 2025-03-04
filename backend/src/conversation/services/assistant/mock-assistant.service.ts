@@ -30,10 +30,11 @@ export class MockAssistantService implements AssistantServiceI {
       });
 
       rl.on('line', (line) => {
-        observer.next(line);
+        observer.next(line + '\n');
       });
 
       rl.on('close', () => {
+        observer.next('[DONE]');
         observer.complete();
       });
 
