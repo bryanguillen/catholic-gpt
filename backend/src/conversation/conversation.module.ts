@@ -6,6 +6,7 @@ import { Conversation } from './entities/conversation.entity';
 import { Message } from './entities/message.entity';
 import { AppUserModule } from '../app-user/app-user.module';
 import { AssistantService } from './services/assistant/assistant.service';
+import { MockAssistantService } from './services/assistant/mock-assistant.service';
 import { ResponseStreamedEventListener } from './events/response-streamed.event';
 
 @Module({
@@ -13,7 +14,12 @@ import { ResponseStreamedEventListener } from './events/response-streamed.event'
   controllers: [ConversationController],
   providers: [
     ConversationService,
-    AssistantService,
+    {
+      provide: 'AssistantService',
+      useClass: !!process.env.OPENAI_API_KEY
+        ? AssistantService
+        : MockAssistantService,
+    },
     ResponseStreamedEventListener,
   ],
 })
