@@ -52,7 +52,7 @@ export class ConversationController {
     );
 
     this.logger.log('Conversation created', 'ConversationController', {
-      conversation,
+      conversationId: conversation.id,
     });
 
     return {
@@ -72,20 +72,17 @@ export class ConversationController {
       body,
     });
 
-    const message = convertMessageToDto(
-      await this.conversationService.saveUserMessage(
-        conversationId,
-        body.message,
-      ),
+    const message = await this.conversationService.saveUserMessage(
+      conversationId,
+      body.message,
     );
 
     this.logger.log('User message saved', 'ConversationController', {
       conversationId,
-      message,
     });
 
     return {
-      data: message,
+      data: convertMessageToDto(message),
     };
   }
 
