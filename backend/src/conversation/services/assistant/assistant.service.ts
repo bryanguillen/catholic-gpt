@@ -3,8 +3,10 @@ import { ConfigService } from '@nestjs/config';
 import OpenAI from 'openai';
 import { Observable } from 'rxjs';
 
+import { AssistantServiceI } from './assistant-service.interface';
+
 @Injectable()
-export class AssistantService {
+export class AssistantService implements AssistantServiceI {
   private openai: OpenAI;
   private assistantId: string;
 
