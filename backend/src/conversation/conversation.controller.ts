@@ -24,6 +24,7 @@ import {
   ResponseStreamedEvent,
 } from './events/response-streamed.event';
 import { AssistantServiceI } from './services/assistant/assistant-service.interface';
+import { LoggerService } from '../logger/logger.service';
 
 @Controller('conversation')
 export class ConversationController {
@@ -32,18 +33,27 @@ export class ConversationController {
     @Inject('AssistantService')
     private readonly assistantService: AssistantServiceI,
     private readonly eventEmitter: EventEmitter2,
+    private readonly logger: LoggerService,
   ) {}
 
   @Post()
   async createConversation(
     @Body() body: CreateConversationDto,
   ): Promise<CreateConversationResponseDto> {
+    this.logger.log('Creating conversation', 'ConversationController', {
+      body,
+    });
+
     const { appUserId, message } = body;
 
     const conversation = await this.conversationService.createConversation(
       appUserId,
       message,
     );
+
+    this.logger.log('Conversation created', 'ConversationController', {
+      conversation,
+    });
 
     return {
       conversationId: conversation.id,
@@ -57,10 +67,19 @@ export class ConversationController {
     @Param('conversationId') conversationId: string,
     @Body() body: SaveUserMessageRequestDto,
   ): Promise<SaveUserMessageResponseDto> {
+    this.logger.log('Saving user message', 'ConversationController', {
+      conversationId,
+      body,
+    });
+
     const message = await this.conversationService.saveUserMessage(
       conversationId,
       body.message,
     );
+
+    this.logger.log('User message saved', 'ConversationController', {
+      message,
+    });
 
     return {
       data: convertMessageToDto(message),
