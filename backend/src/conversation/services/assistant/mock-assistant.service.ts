@@ -26,7 +26,7 @@ export class MockAssistantService implements AssistantServiceI {
       const fileStream = fs.createReadStream(path.join(__dirname, 'mock.md'));
       const rl = readline.createInterface({
         input: fileStream,
-        crlfDelay: Infinity,
+        crlfDelay: 200,
       });
 
       rl.on('line', (line) => {
