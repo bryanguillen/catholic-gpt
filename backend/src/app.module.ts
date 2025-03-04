@@ -4,6 +4,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { EventEmitterModule } from '@nestjs/event-emitter';
 import { AppUserModule } from './app-user/app-user.module';
 import { ConversationModule } from './conversation/conversation.module';
+import { LoggerModule } from './logger/logger.module';
 
 @Module({
   imports: [
@@ -27,6 +28,7 @@ import { ConversationModule } from './conversation/conversation.module';
     EventEmitterModule.forRoot(),
     AppUserModule,
     ConversationModule,
+    LoggerModule,
   ],
 })
 export class AppModule {}
