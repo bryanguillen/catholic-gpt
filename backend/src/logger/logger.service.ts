@@ -1,8 +1,8 @@
-import { Injectable, LoggerService as NestLoggerService } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import * as winston from 'winston';
 
 @Injectable()
-export class LoggerService implements NestLoggerService {
+export class LoggerService {
   private readonly logger = winston.createLogger({
     transports: [
       new winston.transports.Console(),
@@ -16,23 +16,19 @@ export class LoggerService implements NestLoggerService {
     ),
   });
 
-  log(message: string) {
-    this.logger.info(message);
+  log(message: string, context?: string, meta: Record<string, any> = {}) {
+    this.logger.info(message, { context, ...meta });
   }
 
-  error(message: string, trace?: string) {
-    this.logger.error(`${message} ${trace ? '\n' + trace : ''}`);
+  error(message: string, context?: string, meta: Record<string, any> = {}) {
+    this.logger.error(message, { context, ...meta });
   }
 
-  warn(message: string) {
-    this.logger.warn(message);
+  warn(message: string, context?: string, meta: Record<string, any> = {}) {
+    this.logger.warn(message, { context, ...meta });
   }
 
-  debug(message: string) {
-    this.logger.debug(message);
-  }
-
-  verbose(message: string) {
-    this.logger.verbose(message);
+  debug(message: string, context?: string, meta: Record<string, any> = {}) {
+    this.logger.debug(message, { context, ...meta });
   }
 }
