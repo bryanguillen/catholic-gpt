@@ -6,6 +6,7 @@ import {
   Sse,
   UseGuards,
   UseInterceptors,
+  Inject,
 } from '@nestjs/common';
 import { Observable } from 'rxjs';
 import { EventEmitter2 } from '@nestjs/event-emitter';
@@ -16,19 +17,20 @@ import { SaveUserMessageRequestDto } from './dto/save-user-message-request.dto';
 import { SaveUserMessageResponseDto } from './dto/save-user-message-response.dto';
 import { StreamAssistantResponseDto } from './dto/stream-assistant-response.dto';
 import { convertMessageToDto } from './conversation.utils';
-import { AssistantService } from './services/assistant/assistant.service';
 import { ThreadIdGuard } from './guards/thread-id.guard';
 import { ThreadIdInterceptor } from './interceptors/thread-id.interceptor';
 import {
   RESPONSE_STREAMED_EVENT,
   ResponseStreamedEvent,
 } from './events/response-streamed.event';
+import { AssistantServiceI } from './services/assistant/assistant-service.interface';
 
 @Controller('conversation')
 export class ConversationController {
   constructor(
     private readonly conversationService: ConversationService,
-    private readonly assistantService: AssistantService,
+    @Inject('AssistantService')
+    private readonly assistantService: AssistantServiceI,
     private readonly eventEmitter: EventEmitter2,
   ) {}
 

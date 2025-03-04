@@ -1,10 +1,10 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable, Inject, NotFoundException } from '@nestjs/common';
 import { Repository, DataSource } from 'typeorm';
 import { InjectRepository, InjectDataSource } from '@nestjs/typeorm';
 import { Conversation } from '../entities/conversation.entity';
 import { Message, SenderType } from '../entities/message.entity';
 import { AppUserService } from '../../app-user/app-user.service';
-import { AssistantService } from './assistant/assistant.service';
+import { AssistantServiceI } from './assistant/assistant-service.interface';
 
 @Injectable()
 export class ConversationService {
@@ -14,7 +14,8 @@ export class ConversationService {
     @InjectRepository(Message)
     private messageRepository: Repository<Message>,
     private appUserService: AppUserService,
-    private assistantService: AssistantService,
+    @Inject('AssistantService')
+    private assistantService: AssistantServiceI,
     @InjectDataSource() private dataSource: DataSource,
   ) {}
 
