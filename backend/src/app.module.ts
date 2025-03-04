@@ -15,7 +15,7 @@ import { LoggerModule } from './logger/logger.module';
       imports: [ConfigModule],
       useFactory: (configService: ConfigService) => ({
         type: 'postgres',
-        ...(!configService.get<string>('DB_URL')
+        ...(configService.get<string>('DB_URL')
           ? {
               url: configService.get<string>('DB_URL'),
             }
