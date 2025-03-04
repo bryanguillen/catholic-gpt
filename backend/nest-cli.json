@@ -3,6 +3,12 @@
   "collection": "@nestjs/schematics",
   "sourceRoot": "src",
   "compilerOptions": {
-    "deleteOutDir": true
+    "deleteOutDir": true,
+    "assets": [
+      {
+        "include": "conversation/services/assistant/mock.md",
+        "outDir": "./dist/"
+      }
+    ]
   }
 }
