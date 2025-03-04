@@ -72,17 +72,20 @@ export class ConversationController {
       body,
     });
 
-    const message = await this.conversationService.saveUserMessage(
-      conversationId,
-      body.message,
+    const message = convertMessageToDto(
+      await this.conversationService.saveUserMessage(
+        conversationId,
+        body.message,
+      ),
     );
 
     this.logger.log('User message saved', 'ConversationController', {
+      conversationId,
       message,
     });
 
     return {
-      data: convertMessageToDto(message),
+      data: message,
     };
   }
 
