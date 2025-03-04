@@ -15,11 +15,17 @@ import { LoggerModule } from './logger/logger.module';
       imports: [ConfigModule],
       useFactory: (configService: ConfigService) => ({
         type: 'postgres',
-        host: configService.get<string>('DB_HOST'),
-        port: configService.get<number>('DB_PORT'),
-        username: configService.get<string>('DB_USERNAME'),
-        password: configService.get<string>('DB_PASSWORD'),
-        database: configService.get<string>('DB_NAME'),
+        ...(!configService.get<string>('DB_URL')
+          ? {
+              url: configService.get<string>('DB_URL'),
+            }
+          : {
+              host: configService.get<string>('DB_HOST'),
+              port: configService.get<number>('DB_PORT'),
+              username: configService.get<string>('DB_USERNAME'),
+              password: configService.get<string>('DB_PASSWORD'),
+              database: configService.get<string>('DB_NAME'),
+            }),
         autoLoadEntities: configService.get<boolean>('DB_AUTO_LOAD_ENTITIES'),
         synchronize: configService.get<boolean>('DB_SYNCHRONIZE'),
       }),
