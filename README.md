@@ -61,7 +61,7 @@ We are currently working on opening up the `frontend` for contributions. More to
 ## License  
 
 This project is licensed under the **AGPL v3**.  
-See [LICENSE](./LICENSE) for details.
+See [LICENSE](https://github.com/bryanguillen/catholic-gpt/blob/main/LICENSE.md) for details.
 
 ## Acknowledgments & Motivation  
 
