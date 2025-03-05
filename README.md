@@ -2,6 +2,8 @@
 
 ## Project Overview  
 
+![](./demo.gif)
+
 **Catholic GPT** is a full-stack web application designed to help lay Catholics deepen their understanding of the faith **through AI-powered conversations**. There's a current state and the future vision for this project, which will be helpful in understanding this project.
 
 ### Current State and Features
@@ -31,6 +33,13 @@ As you'll see, OpenAI is currently used, and it is not optimal. This is currentl
 
 Ultimately, the vision will continue to evolve as we go on, but moving towards more accuracy and trustworthiness is the vision.
 
+## Roadmap
+
+_Note: Given that we are in the early phases of this project (closed beta), this will continue to evolve. Thus, you'll see it only records two phases as of now, with more to come._
+
+* ~~Phase 1 - This is the initial launch phase. The job here is to have a usable product that is deployed and can be put into users' hands -- in other words, the MVP.~~
+* Phase 2 - Gather feedback is the main goal here. But, this will also include minor bug fixes in the `frontend` and a key enhancement that make it easier to get feedback. The key enhancement is allowing the user to rate the answer as useful or not.
+
 ## Tech Stack  
 
 - **Frontend:** React, Vite, Tailwind CSS, Shadcn  
@@ -45,8 +54,6 @@ Ultimately, the vision will continue to evolve as we go on, but moving towards m
 /backend    # Backend NestJS API (handles chat logic, storage, AI calls)
 ```
 
-
-
 ## Contributing  
 
 We are currently working on opening up the `frontend` for contributions. More to come soon.
@@ -56,13 +63,9 @@ We are currently working on opening up the `frontend` for contributions. More to
 This project is licensed under the **AGPL v3**.  
 See [LICENSE](./LICENSE) for details.
 
-
-
 ## Acknowledgments & Motivation  
 
 This project was born out of a desire to create a trustworthy, Catholic-centered AI resource for laypeople curious about their faith. Inspired by the rich intellectual tradition of the Church, **Catholic GPT** seeks to make apologetics more accessible through modern technology.
-
-
 
 ## Contact  
 
