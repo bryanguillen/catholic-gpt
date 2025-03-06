@@ -2,6 +2,8 @@ import { useState } from 'react';
 import { Send } from 'lucide-react';
 import { Textarea, Button } from '@/components';
 
+import { useAssistantStreamingContext } from '../context/AssistantStreamingContext';
+
 interface MessageFormProps {
   disabled: boolean;
   handleSendMessage: (message: string) => void;
@@ -9,6 +11,7 @@ interface MessageFormProps {
 
 function MessageForm({ disabled, handleSendMessage }: MessageFormProps) {
   const [message, setMessage] = useState('');
+  const { isStreaming } = useAssistantStreamingContext();
 
   const sendMessageWrapper = () => {
     handleSendMessage(message);
@@ -37,7 +40,7 @@ function MessageForm({ disabled, handleSendMessage }: MessageFormProps) {
         <Button
           size="icon"
           onClick={sendMessageWrapper}
-          disabled={!message.trim() || disabled}
+          disabled={!message.trim() || disabled || isStreaming}
         >
           <Send className="h-4 w-4" />
           <span className="sr-only">Send</span>

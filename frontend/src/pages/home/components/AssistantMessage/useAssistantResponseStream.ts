@@ -1,9 +1,12 @@
 import { useRef, useState, useEffect } from 'react';
 import { toast } from 'sonner';
 
+import { useAssistantStreamingContext } from '../../context/AssistantStreamingContext';
+
 const useAssistantResponseStream = (conversationId: string) => {
   const [responseText, setResponseText] = useState('');
   const isInitialized = useRef(false);
+  const { setIsStreaming } = useAssistantStreamingContext();
 
   useEffect(() => {
     // HACK: ConversationId will be empty when the message is first created
@@ -15,10 +18,15 @@ const useAssistantResponseStream = (conversationId: string) => {
 
     isInitialized.current = true;
 
+    eventSource.onopen = () => {
+      setIsStreaming(true);
+    };
+
     eventSource.onmessage = (event) => {
       const { data } = event;
 
       if (data.includes('[DONE]')) {
+        setIsStreaming(false);
         eventSource.close();
         return;
       }
@@ -32,9 +40,10 @@ const useAssistantResponseStream = (conversationId: string) => {
       toast.error('Error while streaming', {
         description: 'Closed stream due to error. Try again.',
       });
+      setIsStreaming(false);
       eventSource.close();
     };
-  }, [conversationId, setResponseText]);
+  }, [conversationId, setResponseText, setIsStreaming]);
 
   return responseText;
 };
