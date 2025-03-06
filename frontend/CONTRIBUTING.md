@@ -55,8 +55,6 @@ __Note: The relevant `npm` commands are also found in the `README`.__
   - Include a clear description of the change.
   - Include screenshots if the change is visual.
 
----
-
 ## Communication
 
 As mentioned in the `README.md`, you will want to join the [Discord server](https://discord.gg/bAmCr5gu) **once an issue is assigned to you**.
