@@ -35,7 +35,7 @@ function MessageForm({ disabled, handleSendMessage }: MessageFormProps) {
           placeholder="E.g. What is the Catholic Church?"
           className="max-h-[10rem] min-h-[2.5rem] flex-1 resize-none"
           rows={1}
-          disabled={disabled}
+          disabled={disabled || isStreaming}
         />
         <Button
           size="icon"
