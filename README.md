@@ -39,7 +39,7 @@ _Note: Given that we are in the early phases of this project (closed beta), this
 
 * ~~Phase 1 - This is the initial launch phase. The job here is to have a usable product that is deployed and can be put into users' hands -- in other words, the MVP.~~
 * Phase 2 - Gather feedback is the main goal here. But, this will also include minor bug fixes in the `frontend`, testing enhancements in the `frontend` and a key enhancement that make it easier to get feedback. The key enhancement is allowing the user to rate the answer as useful or not.
-* Phase 3 - __TBD depending on the feedback from phase 2. This phase will be mostly about cleanup and getting ready to scale. This includes including things like storybook, evaluating NextJS, and ultimately, just committing to some patterns that will help scale this project better, like state management, etc.__
+* Phase 3 - __TBD depending on the feedback from phase 2. This phase will be mostly about cleanup and getting ready to scale. This includes including things like storybook, evaluating NextJS, and ultimately, just committing to some patterns that will help scale this project better, like state management, etc. Most importantly, this will be done with the future features in mind.__
 
 ## Tech Stack  
 
