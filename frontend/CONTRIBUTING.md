@@ -12,7 +12,6 @@ This document outlines some basic guidelines for contributing to the **frontend*
 - [Branching and Pull Requests](#branching-and-pull-requests)
 - [Communication](#communication)
 - [Contributor Expectations](#contributor-expectations)
-- [Code of Conduct](#code-of-conduct)
 
 ## Getting Started
 
