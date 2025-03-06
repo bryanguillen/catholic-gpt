@@ -38,7 +38,7 @@ Ultimately, the vision will continue to evolve as we go on, but moving towards m
 _Note: Given that we are in the early phases of this project (closed beta), this will continue to evolve. Thus, you'll see it only records two phases as of now, with more to come._
 
 * ~~Phase 1 - This is the initial launch phase. The job here is to have a usable product that is deployed and can be put into users' hands -- in other words, the MVP.~~
-* Phase 2 - Gather feedback is the main goal here. But, this will also include minor bug fixes in the `frontend` and a key enhancement that make it easier to get feedback. The key enhancement is allowing the user to rate the answer as useful or not.
+* Phase 2 - Gather feedback is the main goal here. But, this will also include minor bug fixes in the `frontend`, testing enhancements in the `frontend` and a key enhancement that make it easier to get feedback. The key enhancement is allowing the user to rate the answer as useful or not.
 
 ## Tech Stack  
 
