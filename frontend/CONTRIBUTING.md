@@ -1,6 +1,6 @@
 # Contributing to Catholic GPT Frontend
 
-Thank you for your interest in contributing to **Catholic GPT**! This project is in its early stages, and we're excited to welcome developers who want to help build a user-friendly Catholic AI experience.
+Thank you for your interest in contributing to **Catholic GPT**! This project is in its early stages, and we're excited to welcome developers who want to help build a user-friendly Catholic AI experience or who just want to "hack away" and have some fun.
 
 This document outlines some basic guidelines for contributing to the **frontend** portion of the project.
 
