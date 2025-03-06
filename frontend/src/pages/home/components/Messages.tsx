@@ -23,7 +23,6 @@ function Messages({ messages }: MessagesProps) {
             <AssistantMessage
               key={id}
               conversationId={message.conversationId}
-              messagesEndRef={messagesEndRef}
             />
           ) : (
             <MessageContainer key={id} senderType={SenderType.USER}>
