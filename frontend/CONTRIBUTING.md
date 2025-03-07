@@ -15,6 +15,14 @@ This document outlines some basic guidelines for contributing to the **frontend*
 
 ## Getting Started
 
+### Backend
+
+When working on the `frontend`, you'll want to run the `backend` service, too. The simplest way to do this would be to run it using `docker-compose`. Otherwise, you can run it from scratch as you would any other `NestJS` app. For more on this, please refer to the `backend` `README.md` file.
+
+### Frontend
+
+Once you've got the backend running, you'll want to ensure you follow the steps below:
+
 1. **Fork the Repository** – Create your own copy of the repo under your GitHub account.
 2. **Clone Your Fork** – Bring the code to your local machine.
 3. **Install Dependencies** – Run:
@@ -25,7 +33,7 @@ This document outlines some basic guidelines for contributing to the **frontend*
     ```bash
     npm run dev
     ```
-__Note: The relevant `npm` commands are also found in the `README`.__
+__Note: The relevant `npm` commands can also found in the `README`.__
 
 ## How to Contribute
 
