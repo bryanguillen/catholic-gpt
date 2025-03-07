@@ -82,7 +82,7 @@ frontend/
 
 ## Contributing
 
-Contributions coming soon!
+Please read the [CONTRIBUTING.md](./CONTRIBUTING.md).
 
 ### Important Note on Issues
 
