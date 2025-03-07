@@ -17,7 +17,7 @@ This document outlines some basic guidelines for contributing to the **frontend*
 
 ### Backend
 
-When working on the `frontend`, you'll want to run the `backend` service, too. The simplest way to do this would be to run it using `docker-compose`. Otherwise, you can run it from scratch as you would any other `NestJS` app. For more on this, please refer to the `backend` `README.md` file.
+When working on the `frontend`, you'll want to run the `backend` service, too. The simplest way to do this would be to run it using `docker-compose`. Otherwise, you can run it from scratch as you would any other `NestJS` app. For more on this, please refer to the [backend README.md](../backend/README.md) file.
 
 ### Frontend
 
@@ -56,7 +56,7 @@ __Note: The relevant `npm` commands can also found in the `README`.__
 
 - Branch off `main`.
 - Use descriptive branch names (e.g., `feature/add-chat-bubbles`, `fix/mobile-navbar`).
-- Open a **Draft Pull Request** early if you’d like feedback before finalizing.
+- Open a **Draft Pull Request** early if you'd like feedback before finalizing.
 - All PRs should:
   - Reference the related issue (if applicable).
   - Include a clear description of the change.
@@ -70,7 +70,7 @@ As mentioned in the `README.md`, you will want to join the [Discord server](http
 
 - Be respectful; don't be rude
 - Document your changes when necessary (comments, README updates, etc.).
-- When in doubt, ask! We’re happy to help.
+- When in doubt, ask! We're happy to help.
 
 ## Thank You!
 
