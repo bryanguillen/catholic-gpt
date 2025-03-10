@@ -10,6 +10,7 @@ This document outlines some basic guidelines for contributing to the **frontend*
 - [How to Contribute](#how-to-contribute)
 - [Code Guidelines](#code-guidelines)
 - [Branching and Pull Requests](#branching-and-pull-requests)
+- [Project Governance](#project-governance)
 - [Communication](#communication)
 - [Contributor Expectations](#contributor-expectations)
 
@@ -61,6 +62,53 @@ __Note: The relevant `npm` commands can also found in the `README`.__
   - Reference the related issue (if applicable).
   - Include a clear description of the change.
   - Include screenshots if the change is visual.
+
+## Project Governance
+
+🚀 **Who Owns This Project?**
+
+Catholic GPT is a project started and led by Bryan Guillen to build a Catholic AI assistant that can answer question for members (and those curious about the Church) with as much precision as possible.
+
+While this is an open source project, the overall vision, roadmap, and major technical decisions are currently maintained by Bryan for now, until the project gets to a more stable place.
+
+💡 **Who Can Open Issues?**
+
+At this stage of the project, only the project lead will open issues to maintain a clear development roadmap. These will include small feature requests, bugfixes, and internal enhancements (like testing, etc.). Stay tuned for more.
+
+👉 If you have a feature suggestion or bug report, please do one of the following:
+
+* Comment on an existing issue that seems related
+* Start a discussion in our Discord (see link below)
+
+🛠️ **Who Can Merge Pull Requests?**
+
+Right now, only the lead project maintainer will merge pull requests. This is to ensure that the overall project vision stays clear for now.
+
+🎯 **What Type of Contributions Are You Looking For?**
+
+As mentioned above, here’s what we are actively accepting:
+
+* ✅ Bug fixes
+* ✅ Minor UI/UX improvements
+* ✅ Improved tests (if applicable)
+* ✅ Documentation improvements
+
+We are not yet accepting:
+
+* ❌ Major feature builds without prior discussion
+* ❌ Major refactors, etc.
+
+📅 When Will This Change?
+
+As the project matures, the goal is to open up:
+
+* Public GitHub Issues for all contributors.
+* Feature contributions from trusted contributors.
+* Ownership of certain parts of the project (e.g., frontend, backend, etc.).
+
+Again, for now, we’re keeping a tight, focused roadmap until the project gains traction.
+
+✅ If you’re interested in shaping the project’s future, join our Discord (see link below) or contribute to any existing and open issue.
 
 ## Communication
 
