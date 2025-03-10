@@ -1,0 +1,63 @@
+name: Frontend CI
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  lint-and-test:
+    name: Run Lint and Test
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checkout the code
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Set up Node.js
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20' # Match your .nvmrc version
+
+      # Install dependencies
+      - name: Install dependencies
+        run: npm install
+
+      # Run Linter
+      - name: Run Linter
+        id: lint
+        run: npm run lint
+        continue-on-error: true
+
+      # Run Tests
+      - name: Run Tests
+        id: test
+        run: npm run test
+        continue-on-error: true
+
+      # Post a GitHub comment if Lint fails
+      - name: Comment if Lint Fails
+        if: steps.lint.outcome == 'failure'
+        uses: mshick/add-pr-comment@v2
+        with:
+          message: |
+            🚨 **Linting failed!**
+            Please run `npm run lint` locally and fix any errors.
+            Thank you @${{ github.event.pull_request.user.login }}!
+
+      # Post a GitHub comment if Tests fail
+      - name: Comment if Tests Fail
+        if: steps.test.outcome == 'failure'
+        uses: mshick/add-pr-comment@v2
+        with:
+          message: |
+            🚨 **Tests failed!**
+            Please run `npm run test` locally and fix any errors.
+            Thank you @${{ github.event.pull_request.user.login }}!
+
+      # Fail the workflow if either step failed
+      - name: Fail if Lint or Test failed
+        if: steps.lint.outcome == 'failure' || steps.test.outcome == 'failure'
+        run: exit 1
