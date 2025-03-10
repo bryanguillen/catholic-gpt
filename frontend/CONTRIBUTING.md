@@ -73,11 +73,10 @@ While this is an open source project, the overall vision, roadmap, and major tec
 
 💡 **Who Can Open Issues?**
 
-At this stage of the project, only the project lead will open issues to maintain a clear development roadmap. These will include small feature requests, bugfixes, and internal enhancements (like testing, etc.). Stay tuned for more.
+At this stage of the project, only the project lead will open issues to maintain a clear development roadmap. These issues will include small feature requests, bugfixes, and internal enhancements (like testing, etc.). Stay tuned for more. **All other issues will be closed for now**.
 
 👉 If you have a feature suggestion or bug report, please do one of the following:
 
-* Comment on an existing issue that seems related
 * Start a discussion in our Discord (see link below)
 
 🛠️ **Who Can Merge Pull Requests?**
@@ -112,7 +111,9 @@ Again, for now, we’re keeping a tight, focused roadmap until the project gains
 
 ## Communication
 
-As mentioned in the `README.md`, you will want to join the [Discord server](https://discord.gg/bAmCr5gu) **once an issue is assigned to you**.
+As mentioned in the `README.md`, you will want to join the [Discord server](https://discord.gg/bAmCr5gu).
+
+Prefer to have discussions here, on GitHub, let me know. I am open to that, too.
 
 ## Contributor Expectations
 

@@ -71,3 +71,5 @@ This project was born out of a desire to create a trustworthy, Catholic-centered
 ## Contact  
 
 For questions, feedback, or future collaboration, feel free to reach out on [Discord](https://discord.gg/bAmCr5gu).
+
+GitHub discussions has not yet been opened, but if you'd find it helpful to also have that enabled, feel free to share.
