@@ -2,7 +2,7 @@
 
 Welcome to the **Catholic GPT Frontend** — a React-based single-page application (SPA) designed to serve as the frontend for **Catholic GPT**, an AI-powered Catholic apologist tool.
 
-This project is part of an open source initiative to create an AI assistant that helps lay Catholics learn more about their faith through trustworthy, Catholic-sourced responses.
+This project is part of an open source initiative to create an AI assistant that helps lay Catholics learn more about their faith through trustworthy and Catholic-sourced responses.
 
 ## Tech Stack
 
