@@ -1,3 +1,5 @@
+// TESTING!
+
 import { AppInitializer, Toaster } from '@/components';
 import { Home } from '@/pages/home';
 
