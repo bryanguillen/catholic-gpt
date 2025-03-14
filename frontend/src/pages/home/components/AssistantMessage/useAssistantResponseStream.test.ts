@@ -35,9 +35,9 @@ describe('useAssistantResponseStream', () => {
 
     global.EventSource = vi.fn().mockImplementation(() => {
       mockEventSource = {
-        onopen: undefined,
-        onmessage: undefined,
-        onerror: undefined,
+        onopen: vi.fn(),
+        onmessage: vi.fn(),
+        onerror: vi.fn(),
         close: vi.fn(),
       };
       return mockEventSource;
