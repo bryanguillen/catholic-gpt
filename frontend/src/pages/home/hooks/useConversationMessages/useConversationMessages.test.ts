@@ -38,6 +38,7 @@ describe('useConversationMessages', () => {
 
     expect(result.current.conversationId).toBe('new-conversation-id');
     expect(result.current.messages).toHaveLength(2);
+    expect(result.current.messages[0].content).toBe('Hello');
   });
 
   test('sends a message to an existing conversation', async () => {
@@ -71,5 +72,6 @@ describe('useConversationMessages', () => {
     });
 
     expect(result.current.messages).toHaveLength(4);
+    expect(result.current.messages[2].content).toBe('Hi there');
   });
 });
