@@ -14,7 +14,7 @@ function AssistantMessage({ conversationId }: AssistantMessageProps) {
   return (
     <MessageContainer senderType={SenderType.ASSISTANT}>
       {!responseText ? (
-        <LoadingDots />
+        <LoadingDots data-testid="assistant-message-loading-dots" />
       ) : (
         <ReactMarkdown>{responseText}</ReactMarkdown>
       )}
