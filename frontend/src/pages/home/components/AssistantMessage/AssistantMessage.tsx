@@ -1,8 +1,9 @@
 import ReactMarkdown from 'react-markdown';
-import { LoadingDots } from '@/components';
+import { LoadingDots, Button} from '@/components';
 import { SenderType } from '@/types';
 import { MessageContainer } from '../MessageContainer';
 import { useAssistantResponseStream } from './useAssistantResponseStream';
+import { useAssistantStreamingContext } from '../../context/AssistantStreamingContext';
 import { Copy } from 'lucide-react';
 
 interface AssistantMessageProps {
@@ -11,6 +12,7 @@ interface AssistantMessageProps {
 
 function AssistantMessage({ conversationId }: AssistantMessageProps) {
   const responseText = useAssistantResponseStream(conversationId);
+  const { isStreaming } = useAssistantStreamingContext();
 
   const handleCopy = () => {
     if (!responseText) return;
@@ -28,13 +30,15 @@ function AssistantMessage({ conversationId }: AssistantMessageProps) {
         )}
       </MessageContainer>
 
-      {responseText && (
-        <button
-          onClick={handleCopy}
-          className="flex items-center text-gray-500 hover:text-gray-700 cursor-pointer"
+      {responseText && !isStreaming && (
+        <Button
+        onClick={handleCopy}
+        variant="ghost"
+        size="icon"
+        className="cursor-pointer"
         >
-          <Copy className="h-5 w-5" />
-        </button>
+        <Copy />
+        </Button>
       )}
     </div>
   );
