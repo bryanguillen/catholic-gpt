@@ -1,6 +1,13 @@
-function LoadingDots() {
+interface LoadingDotsProps {
+  'data-testid'?: string;
+}
+
+function LoadingDots({ 'data-testid': dataTestId }: LoadingDotsProps) {
   return (
-    <div className="flex items-center justify-center space-x-1">
+    <div
+      className="flex items-center justify-center space-x-1"
+      data-testid={dataTestId}
+    >
       <div className="h-2 w-2 animate-bounce rounded-full bg-black"></div>
       <div className="h-2 w-2 animate-bounce rounded-full bg-black delay-200"></div>
       <div className="h-2 w-2 animate-bounce rounded-full bg-black delay-400"></div>
