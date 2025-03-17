@@ -1,5 +1,5 @@
 import ReactMarkdown from 'react-markdown';
-import { LoadingDots, Button} from '@/components';
+import { LoadingDots, Button } from '@/components';
 import { SenderType } from '@/types';
 import { MessageContainer } from '../MessageContainer';
 import { useAssistantResponseStream } from './useAssistantResponseStream';
@@ -19,9 +19,8 @@ function AssistantMessage({ conversationId }: AssistantMessageProps) {
     navigator.clipboard.writeText(responseText);
   };
 
-
   return (
-    <div className="flex flex-col items-start space-y-2"> 
+    <div className="flex flex-col items-start space-y-2">
       <MessageContainer senderType={SenderType.ASSISTANT}>
         {!responseText ? (
           <LoadingDots data-testid="assistant-message-loading-dots" />
@@ -32,12 +31,12 @@ function AssistantMessage({ conversationId }: AssistantMessageProps) {
 
       {responseText && !isStreaming && (
         <Button
-        onClick={handleCopy}
-        variant="ghost"
-        size="icon"
-        className="cursor-pointer"
+          onClick={handleCopy}
+          variant="ghost"
+          size="icon"
+          className="cursor-pointer"
         >
-        <Copy />
+          <Copy />
         </Button>
       )}
     </div>
