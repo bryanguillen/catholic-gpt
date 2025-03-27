@@ -11,7 +11,7 @@ vi.mock('./useAssistantResponseStream', () => ({
 const mockUseAssistantResponseStream = vi.mocked(useAssistantResponseStream);
 
 describe('AssistantMessage', () => {
-  it('renders loading dots when responseText is empty', () => {
+  test('renders loading dots when responseText is empty', () => {
     mockUseAssistantResponseStream.mockReturnValue({
       responseText: '',
       doneStreaming: false,
@@ -22,7 +22,7 @@ describe('AssistantMessage', () => {
     ).toBeInTheDocument();
   });
 
-  it('renders markdown content when responseText is not empty', () => {
+  test('renders markdown content when responseText is not empty', () => {
     const testContent = 'Hello, this is a test message!';
     mockUseAssistantResponseStream.mockReturnValue({
       responseText: testContent,
@@ -32,7 +32,7 @@ describe('AssistantMessage', () => {
     expect(screen.getByText(testContent)).toBeInTheDocument();
   });
 
-  it('renders the copy button when responseText is not empty', () => {
+  test('renders the copy button when responseText is not empty', () => {
     const testContent = 'Hello, this is a test message!';
     mockUseAssistantResponseStream.mockReturnValue({
       responseText: testContent,
@@ -44,7 +44,7 @@ describe('AssistantMessage', () => {
     ).toBeInTheDocument();
   });
 
-  it('does not render the copy button when responseText is empty', () => {
+  test('does not render the copy button when responseText is empty', () => {
     mockUseAssistantResponseStream.mockReturnValue({
       responseText: '',
       doneStreaming: false,
@@ -55,7 +55,7 @@ describe('AssistantMessage', () => {
     ).not.toBeInTheDocument();
   });
   
-  it('does not render the copy button when responseText is still being streamed', () => {
+  test('does not render the copy button when responseText is still being streamed', () => {
     mockUseAssistantResponseStream.mockReturnValue({
       responseText: 'Hello, this is a test message!',
       doneStreaming: false,

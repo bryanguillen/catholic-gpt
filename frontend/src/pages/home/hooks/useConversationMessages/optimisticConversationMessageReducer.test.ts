@@ -37,7 +37,7 @@ describe('optimisticConversationMessageReducer', () => {
     }, // Duplicate
   ];
 
-  it('should return only real messages if a duplicate is found', () => {
+  test('should return only real messages if a duplicate is found', () => {
     const result = optimisticConversationMessageReducer(
       realMessages,
       optimisticMessages
@@ -45,7 +45,7 @@ describe('optimisticConversationMessageReducer', () => {
     expect(result).toEqual(realMessages);
   });
 
-  it('should merge optimistic messages if no duplicates are found', () => {
+  test('should merge optimistic messages if no duplicates are found', () => {
     const newOptimisticMessages: MessageDto[] = [
       {
         id: '3',
@@ -62,17 +62,17 @@ describe('optimisticConversationMessageReducer', () => {
     expect(result).toEqual([...realMessages, ...newOptimisticMessages]);
   });
 
-  it('should handle empty optimistic messages', () => {
+  test('should handle empty optimistic messages', () => {
     const result = optimisticConversationMessageReducer(realMessages, []);
     expect(result).toEqual(realMessages);
   });
 
-  it('should handle empty real messages', () => {
+  test('should handle empty real messages', () => {
     const result = optimisticConversationMessageReducer([], optimisticMessages);
     expect(result).toEqual(optimisticMessages);
   });
 
-  it('should return an empty array if both inputs are empty', () => {
+  test('should return an empty array if both inputs are empty', () => {
     const result = optimisticConversationMessageReducer([], []);
     expect(result).toEqual([]);
   });

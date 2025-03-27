@@ -13,7 +13,7 @@ describe('AppInitializer', () => {
     ) as unknown as typeof fetch;
   });
 
-  it('shows the loader when the user ID is not in local storage', async () => {
+  test('shows the loader when the user ID is not in local storage', async () => {
     render(
       <AppInitializer>
         <div data-testid="children">Children</div>
@@ -23,7 +23,7 @@ describe('AppInitializer', () => {
     expect(screen.getByTestId('app-initializer-loader')).toBeInTheDocument();
   });
 
-  it('shows the children after the request and user ID is now in storage', async () => {
+  test('shows the children after the request and user ID is now in storage', async () => {
     render(
       <AppInitializer>
         <div data-testid="children">Children</div>
@@ -35,7 +35,7 @@ describe('AppInitializer', () => {
     });
   });
 
-  it('does not make the network call and shows children if the page is loaded with local storage', async () => {
+  test('does not make the network call and shows children if the page is loaded with local storage', async () => {
     localStorage.setItem('userId', '123');
 
     render(
