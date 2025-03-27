@@ -69,17 +69,17 @@ describe('useAssistantResponseStream', () => {
       mockEventSource.onmessage?.({ data: 'Hello' });
     });
 
-    expect(result.current).toBe('Hello');
+    expect(result.current.responseText).toBe('Hello');
 
     act(() => {
       mockEventSource.onmessage?.({ data: ' World' });
     });
 
-    expect(result.current).toBe('Hello World');
+    expect(result.current.responseText).toBe('Hello World');
   });
 
   test("stops streaming on '[DONE]' message", async () => {
-    renderHook(() => useAssistantResponseStream('test-id'));
+    const { result } = renderHook(() => useAssistantResponseStream('test-id'));
 
     act(() => {
       mockEventSource.onmessage?.({ data: '[DONE]' });
@@ -87,6 +87,7 @@ describe('useAssistantResponseStream', () => {
 
     expect(mockSetIsStreaming).toHaveBeenCalledWith(false);
     expect(mockEventSource.close).toHaveBeenCalled();
+    expect(result.current.doneStreaming).toBe(true);
   });
 
   test('handles errors and shows toast notification', async () => {

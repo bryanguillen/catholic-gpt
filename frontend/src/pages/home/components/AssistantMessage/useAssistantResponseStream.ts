@@ -6,6 +6,7 @@ import { useAssistantStreamingContext } from '../../context/AssistantStreamingCo
 const useAssistantResponseStream = (conversationId: string) => {
   const [responseText, setResponseText] = useState('');
   const isInitialized = useRef(false);
+  const [doneStreaming, setDoneStreaming] = useState(false);
   const { setIsStreaming } = useAssistantStreamingContext();
 
   useEffect(() => {
@@ -27,6 +28,7 @@ const useAssistantResponseStream = (conversationId: string) => {
 
       if (data.includes('[DONE]')) {
         setIsStreaming(false);
+        setDoneStreaming(true);
         eventSource.close();
         return;
       }
@@ -43,9 +45,9 @@ const useAssistantResponseStream = (conversationId: string) => {
       setIsStreaming(false);
       eventSource.close();
     };
-  }, [conversationId, setResponseText, setIsStreaming]);
+  }, [conversationId, setResponseText, setIsStreaming, setDoneStreaming]);
 
-  return responseText;
+  return { responseText, doneStreaming };
 };
 
 export { useAssistantResponseStream };
